@@ -1,11 +1,11 @@
 import React, {useState} from "react";
 import axios from "axios";
-import "./CreateAccount.css";
+import "./Register.css";
 import { Link, useNavigate } from "react-router-dom";
 import { NotLoggedInNavBar } from "../../Components/NavBar/NotLoggedInNavBar"
 
 
-export function CreateAccount() {
+export function Register() {
     const navigate = useNavigate();
 
     const [username, setUsername] = useState("");
