@@ -21,6 +21,13 @@ connection.once("open", () => {
   console.log("Databse connection established");
 });
 
+app.get('/', (req, res, next) => {
+  res.send('home page')
+})
+
+app.get('/register', (req, res, next) => {
+  res.render('register')
+})
 
 app.post('/register', (req, res, next) => {
   const { password, fullname, email, username } = req.body;
@@ -33,6 +40,21 @@ app.post('/register', (req, res, next) => {
   })
   await user.save();
   res.redirect('/')
+})
+
+app.get('/login', (req, res, next) => {
+  res.render('login')
+})
+
+app.post('./login', async (req, res, next) => {
+  const { username, password } = req.body;
+  const user = await User.findOne({ username });
+  const validPassowrd = await bcrypt.compare(password, user.password);
+  if (validPassowrd) {
+    res.send("Login successfully")
+  } else {
+    res.send('Wrong credential')
+  }
 })
 
 
