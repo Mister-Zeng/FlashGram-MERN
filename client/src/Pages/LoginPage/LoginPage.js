@@ -1,13 +1,41 @@
-import React from 'react'
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import axios from "axios";
 import "./LoginPage.css";
 import Logo from "../../Components/Logos.png"
+import { useNavigate, Link } from "react-router-dom";
 
-export function LoginPage() {
-    const onSubmitHandler = event => {
-        event.preventDefault()
-    }
 
+export const LoginPage = () => {
+  const navigate = useNavigate();
+
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    var data = JSON.stringify({
+      username,
+      password
+    });
+
+    var config = {
+      method: "post",
+      url: `${process.env.REACT_APP_BE}/users/login`,
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      data: data
+    };
+
+    axios(config)
+      .then(function (response) {
+        localStorage.setItem("my_user_token", response.data.token);
+        navigate("/home");
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
 
     return (
         <div className="main-container">
@@ -27,17 +55,28 @@ export function LoginPage() {
                 <div className="">
                     <h2 className="">Welcome back</h2>
                     <p className="">
-                        New to FlashGram? <Link to="/create-account">Sign up</Link>
+                        New to FlashGram? <Link to="/register">Sign up</Link>
                     </p>
                 </div>
-                <form action="" method="POST" className="form container" onSubmit={onSubmitHandler} >
+                <form className="form container" onSubmit={(e) => handleSubmit(e)} >
                     <div className="form-group">
                         <label htmlFor="exampleInputEmail1">Email address</label>
-                        <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required />
+                        <input 
+                        onChange={(e) => setUsername(e.target.value)}
+                        type="text" 
+                        className="form-control" 
+                        id="exampleInputEmail1" 
+                        aria-describedby="emailHelp" 
+                        required />
                     </div>
                     <div className="form-group">
                         <label htmlFor="exampleInputPassword1">Password</label>
-                        <input type="password" className="form-control" id="exampleInputPassword1" required />
+                        <input 
+                        onChange={(e) => setPassword(e.target.value)}
+                        type="password" 
+                        className="form-control" 
+                        id="exampleInputPassword1" 
+                        required />
                     </div>
                     <div className="form-group form-check">
                         <input type="checkbox" className="form-check-input" id="exampleCheck1" />
