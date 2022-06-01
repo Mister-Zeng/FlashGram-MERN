@@ -1,0 +1,13 @@
+body {
+    background-color: rgb(215, 116, 116);
+}
+
+.create-account-main-container {
+    margin-top: 200px;
+    width: 500px;
+}
+
+.create-account-heading {
+    margin-bottom: 30px;
+
+}
