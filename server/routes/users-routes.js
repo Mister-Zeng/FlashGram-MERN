@@ -3,6 +3,68 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 let User = require("../models/user.model");
 
+
+
+const requireLogin = (req, res, next) => {
+  if (!req.session.user_id) {
+    return res.redirect('/login')
+  }
+  next();
+}
+
+
+// home 
+router.route.('/').get( (req, res) => {
+  res.send('home page');
+})
+
+// register 
+router.route.('/register').get((req, res) => {
+  res.render('register');
+})
+
+router.route.('/register').post(registerUser)
+
+// login 
+router.route.('/login').get((req, res) => {
+  res.render('login')
+})
+
+router.route.('./login').post(async (req, resxt) => {
+  const { username, password } = req.body;
+  const foundUser = await User.findAndValidate(username, password)
+  if (foundUser) {
+    req.session.user_id= foundUser._id;
+    res.redirect('/secret');
+  } else {
+    res.redirect('/login');
+  }
+})
+
+// logout
+router.route.('/logout').post((res, req) => {
+  // req.session.user_id = null;
+  req.session.destroy();
+  res.redirect('/login');
+})
+
+
+
+// route once logged in
+router.route.('/secret').get(requireLogin, (req, res) => {
+  res.render('secret')
+})
+
+
+
+
+
+
+
+
+
+
+
 function generateAccessToken(id, username) {
   return jwt.sign({ id, username }, process.env.TOKEN_SECRET, {
     expiresIn: "3600s"

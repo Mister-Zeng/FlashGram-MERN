@@ -14,27 +14,27 @@ export function Register() {
     const [name, setName] = useState("");
     const handleSubmit = (e) => {
       e.preventDefault();
-      var data = JSON.stringify({
+      const data = JSON.stringify({
         username,
         password,
         email,
         name
       });
   
-      var config = {
+    const config = {
         method: "post",
-        url: `${process.env.REACT_APP_BE}/users/register`,
+        url: `${process.env.REACT_APP_BE}/register`,
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json"
         },
-        data: data
+        user: data
       };
   
       axios(config)
         .then(function (response) {
-          localStorage.setItem("my_user_token", response.data.token);
-          navigate("/home");
+          localStorage.setItem("my_user_token", response.user.token);
+          navigate("/secret");
         })
         .catch(function (error) {
           console.log(error);

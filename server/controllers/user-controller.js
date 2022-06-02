@@ -1,17 +1,38 @@
-const uuid = require('uuid/v4');
-const HttpError = require('../models/http-error');
-const User = require('../models/user');
+const User = require('../models/user-model');
+import generateToken from "../utils/generate-token.js";
 
 
-export const usersList = [
-    {
-        id: uuid(),
-        username: "",
-        name: "",
-        email: "",
-        password: ""
+
+const registerUser = async (req, res) => {
+    const { password, fullname, email, username } = req.body;
+
+    const userExists = await User.findOne({ username });
+
+    if (userExists) {
+        res.status(400);
+        throw new Error("User already exist")
     }
-];
+
+    const user = new User({
+      username,
+      password,
+      email,
+      fullname
+    })
+    await user.save();
+    req.session.user_id=user._id;
+    res.redirect('/')
+}
+
+
+
+
+
+
+
+
+
+
 
 export const getUsers = (req, res, next) => {
     res.json({ users: usersList });
@@ -19,7 +40,7 @@ export const getUsers = (req, res, next) => {
 
 export const signup = async (req, res, next) => {
     const errors = validationResult(req);
-    if (!errors.isEmptu()) {
+    if  (!errors.isEmptu()) {
         return next(new HttpError('Invalid inputs passed, please check your data.', 422));
     };
     const { name, username, email, password } = req.body;

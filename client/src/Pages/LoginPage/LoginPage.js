@@ -17,9 +17,9 @@ export const LoginPage = () => {
       password
     });
 
-    var config = {
+    let config = {
       method: "post",
-      url: `${process.env.REACT_APP_BE}/users/login`,
+      url: `${process.env.REACT_APP_BE}/login`,
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json"
@@ -30,7 +30,7 @@ export const LoginPage = () => {
     axios(config)
       .then(function (response) {
         localStorage.setItem("my_user_token", response.data.token);
-        navigate("/home");
+        navigate("/");
       })
       .catch(function (error) {
         console.log(error);
