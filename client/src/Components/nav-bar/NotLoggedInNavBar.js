@@ -1,17 +1,15 @@
-
-
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { notLoggedInMenuItems } from './MenuItems'
 import "./NotLoggedInNavBar.css";
-import Logo from "../Logos.png"
+import logo from "../logos.png"
 
 export function NotLoggedInNavBar() {
     return (
         <nav className="navbar navbar-expand-lg nav-bar-background-color">
             <div className="container-fluid">
                 <NavLink to="/" className="navbar-brand">
-                    <img className="create-account-nav-bar-logo" src={Logo} alt="logo" />
+                    <img className="create-account-nav-bar-logo" src={logo} alt="logo" />
                 </NavLink>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>

@@ -1,24 +1,21 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { LoginPage } from "./Pages/LoginPage/LoginPage"
-import { Register } from "./Pages/Register/Register"
-import { ContactForm } from "./Pages/ContactForm/ContactForm"
-import { ResetPassword } from "./Pages/ResetPassword/ResetPassword"
-import { Home } from "./Pages/Home/Home"
+import { Login } from "./components/screens/login/login"
+import { Register } from "./components/screens/register/register"
+import { ContactPage } from "./components/screens/contact-page/contact-page"
+import { Home } from "./components/screens/home/home"
 
 function App(props) {
 
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<LoginPage />} />
+        <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/contact-us" element={<ContactForm />} />
-        <Route path="/reset-password" element={<ResetPassword />} />
+        <Route path="/contact-us" element={<ContactPage />} />
         <Route path="/home" element={<Home />} />
       </Routes>
     </Router>
-
   );
 }
 

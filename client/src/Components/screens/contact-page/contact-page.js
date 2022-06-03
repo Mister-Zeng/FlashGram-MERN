@@ -1,8 +1,8 @@
 import React from 'react';
-import "./ContactForm.css";
-import { NotLoggedInNavBar } from "../../Components/NavBar/NotLoggedInNavBar"
+import "./contact-page.css";
+import { NotLoggedInNavBar } from "../../nav-bar/NotLoggedInNavBar"
 
-export function ContactForm() {
+export function ContactPage() {
 
     return (
         <div>
