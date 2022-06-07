@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { loggedInMenuItems } from './MenuItems'
 import "./NotLoggedInNavBar.css";
-import Logo from "../Logos.png"
+import logo from "../../images/logos.png"
 import Avatar from '@mui/material/Avatar';
 
 export function LoggedInNavBar() {

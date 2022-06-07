@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { notLoggedInMenuItems } from './MenuItems'
 import "./NotLoggedInNavBar.css";
-import logo from "../logos.png"
+import logo from "../../images/logos.png"
 
 export function NotLoggedInNavBar() {
     return (
