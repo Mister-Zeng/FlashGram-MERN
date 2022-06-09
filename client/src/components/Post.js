@@ -23,7 +23,7 @@ const Post = ({ username, caption, selectedFile, createAt, isUser, id }) => {
         deleteRequest()
             .then((data) => console.log(data))
             .then(() => navigate('/posts'))
-            .then(() => navigate('/myposts'))
+
     }
 
     return (

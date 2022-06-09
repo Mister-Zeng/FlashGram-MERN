@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Typography, InputLabel, Box, TextField, Button, CardMedia } from '@mui/material';
+import { Typography, InputLabel, Box, TextField, Button } from '@mui/material';
 
 const PostDetail = () => {
     const navigate = useNavigate();
     const [inputs, setInputs] = useState({});
     const [post, setPost] = useState();
     const id = useParams().id;
-    console.log(id);
 
     const fetchDetails = async () => {
         const res = await axios.get(`/post/${id}`)
@@ -19,10 +18,13 @@ const PostDetail = () => {
 
     useEffect(() => {
         fetchDetails().then((data) => {
-            setPost(data.post)
-            setInputs({ caption: data.post.caption })
-        })
+            setPost(data.post);
+            setInputs({
+                caption: data.post.caption
+            });
+        });
     }, [id]);
+
 
     const sendRequest = async () => {
         const res = await axios.put(`/post/update/${id}`, {
@@ -30,7 +32,6 @@ const PostDetail = () => {
         })
             .catch(error => console.log(error));
         const data = await res.data;
-        console.log(data)
         return data;
     }
 
@@ -56,12 +57,6 @@ const PostDetail = () => {
                 <form onSubmit={handleSubmit}>
                     <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" boxShadow=" 10px 10px 20px #ccc" maxWidth={500} margin="auto" padding={3} marginTop={10} borderRadius={5}>
                         <Typography fontWeight={"bold"} padding={3} textAlign={"center"} fontSize={22}>Edit Your Post</Typography>
-                        <CardMedia
-                            component="img"
-                            height="194"
-                            image="a"
-                            alt="post"
-                        />
                         <InputLabel sx={{ mb: 1, mt: 2, fontSize: 15 }}>Caption</InputLabel>
                         <TextField value={inputs.caption} name="caption" onChange={handleChange} fullWidth />
                         <Button variant="contained" type="submit">Submit</Button>
