@@ -16,7 +16,7 @@ export const getAllPosts = async (req, res) => {
 }
 
 export const addPost = async (req, res) => {
-    const { user, selectedFile, caption } = req.body;
+    const { user, selectedFile, caption, username } = req.body;
 
     let existingUser;
     try {
@@ -30,7 +30,8 @@ export const addPost = async (req, res) => {
     const post = new Post({
         user,
         selectedFile,
-        caption
+        caption,
+        username
     });
 
     try {
@@ -107,4 +108,16 @@ export const getUserById = async (req, res) => {
         res.status(404).json({ message: "No Post Found" })
     }
     res.status(200).json({ user: userPosts })
+}
+
+export const likePost = async (req, res) => {
+    const { postId } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(postId)) return res.status(404).send(`No post with id: ${postId}`);
+
+    const post = await PostMessage.findById(postId);
+
+    const updatedPost = await PostMessage.findByIdAndUpdate(postId, { likeCount: post.likeCount + 1 }, { new: true });
+
+    res.status(200).json(updatedPost);
 }

@@ -49,7 +49,7 @@ export const signup = async (req, res) => {
 };
 
 export const login = async (req, res) => {
-    const { username, email, password } = req.body;
+    const { username, password } = req.body;
 
     let existingUser;
     try {
@@ -67,7 +67,6 @@ export const login = async (req, res) => {
         res.status(400).json({ message: "Incorrect Password" })
     }
 
-    const token = jwt.sign({ username: username, email: email }, process.env.JWT_SECRET);
-    res.status(200).json({ token, message: "Successfully signed in.", user: existingUser });
+    res.status(200).json({ message: "Successfully signed in.", user: existingUser });
 };
 

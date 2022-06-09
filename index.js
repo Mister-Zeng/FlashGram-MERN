@@ -7,7 +7,6 @@ import 'dotenv/config';
 
 import postRouter from './routes/post-route.js'
 import userRouter from './routes/user-route.js'
-import authRouter from './routes/auth-route.js'
 
 const app = express();
 app.use(cors());
@@ -15,7 +14,6 @@ app.use(bodyParser.json({ limit: "50mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }))
 app.use("/post", postRouter);
 app.use("/user", userRouter);
-app.use("/tokenverify", authRouter);
 const port = process.env.PORT || 5000;
 
 const uri = process.env.ATLAS_URI;
