@@ -1,20 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { BrowserRouter as Router } from 'react-router-dom';
 import App from './App';
 import { Provider } from 'react-redux';
-import { configureStore } from '@reduxjs/toolkit'
-
-import allReducers from './reducers'
-
-const store = configureStore({
-  allReducers,
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
-  devTools: process.env.NODE_ENV !== 'production',
-})
+import { store } from './store';
+import './index.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Provider store={store}>
-    <App />
+    <Router>
+      <App />
+    </Router>
   </Provider>
 );

@@ -1,8 +1,8 @@
 import User from '../models/user-model.js';
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
-
-export const getAllUser = async (req, res, next) => {
+export const getAllUser = async (req, res) => {
     let users;
     try {
         users = await User.find();
@@ -10,12 +10,12 @@ export const getAllUser = async (req, res, next) => {
         console.log(error);
     }
     if (!users) {
-        res.status(404).json({ message: "no Users Found" })
+        res.status(404).json({ message: "No Users Found" })
     }
     res.status(200).json({ users });
 };
 
-export const signup = async (req, res, next) => {
+export const signup = async (req, res) => {
     const { name, username, email, password } = req.body;
 
     let existingUser
@@ -48,8 +48,8 @@ export const signup = async (req, res, next) => {
     res.status(201).json({ user });
 };
 
-export const login = async (req, res, next) => {
-    const { username, password } = req.body;
+export const login = async (req, res) => {
+    const { username, email, password } = req.body;
 
     let existingUser;
     try {
@@ -57,13 +57,17 @@ export const login = async (req, res, next) => {
     } catch (error) {
         console.log(error)
     };
+
     if (!existingUser) {
         res.status(404).json({ message: "Couldnt Find User By This Email" })
     }
 
     const isPasswordCorrect = bcrypt.compare(password, existingUser.password);
     if (!isPasswordCorrect) {
-        res.status(400).json({ message: "Incorrect Passrod" })
+        res.status(400).json({ message: "Incorrect Password" })
     }
-    res.status(200).json({ message: 'Logged in successfully' })
+
+    const token = jwt.sign({ username: username, email: email }, process.env.JWT_SECRET);
+    res.status(200).json({ token, message: "Successfully signed in.", user: existingUser });
 };
+

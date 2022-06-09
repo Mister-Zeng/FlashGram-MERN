@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import FileBase from 'react-file-base64';
 import { useDispatch } from 'react-redux';
-import { createPost } from "../../actions/posts";
+import { createPost } from "../actions/posts";
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';

@@ -1,24 +1,33 @@
-import React, { useEffect } from "react";
-import { useDispatch } from 'react-redux'
-import { getPosts } from './actions/posts';
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Login } from "./components/screens/login/login"
-import { Register } from "./components/screens/register/register"
-import { ContactPage } from "./components/screens/contact-page/contact-page"
-import { Home } from "./components/screens/home/home"
-
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import Header from './components/Header';
+import Auth from './components/Auth';
+import Posts from './components/Posts';
+import UserPosts from './components/UserPosts';
+import PostDetail from './components/PostDetail';
+import AddPost from './components/AddPost';
+import { useSelector } from "react-redux";
 
 function App() {
+  const isLoggedIn = useSelector(state => state.isLoggedIn)
+  console.log(isLoggedIn);
 
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/contact-us" element={<ContactPage />} />
-        <Route path="/home" element={<Home />} />
-      </Routes>
-    </Router>
+    <React.Fragment>
+      <header>
+        <Header />
+      </header>
+      <main>
+        <Routes>
+          <Route path="/auth" element={<Auth />} />
+          <Route path="/posts" element={<Posts />} />
+          <Route path="/myposts" element={<UserPosts />} />
+          <Route path="/myposts/:id" element={<PostDetail />} />
+          <Route path="/posts/add" element={<AddPost />} />
+        </Routes>
+      </main>
+    </React.Fragment>
+
   );
 }
 

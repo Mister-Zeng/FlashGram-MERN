@@ -5,7 +5,7 @@ import User from '../models/user-model.js';
 export const getAllPosts = async (req, res) => {
     let posts;
     try {
-        posts = await Post.find()
+        posts = await Post.find().populate('user')
     } catch (error) {
         console.log(error)
     }
@@ -106,5 +106,5 @@ export const getUserById = async (req, res) => {
     if (!userPosts) {
         res.status(404).json({ message: "No Post Found" })
     }
-    res.status(200).json({ posts: userPosts })
+    res.status(200).json({ user: userPosts })
 }

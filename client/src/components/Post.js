@@ -1,24 +1,21 @@
-import { styled } from '@mui/material/styles';
+import React from 'react'
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import { red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
-const Post = ({ post }) => {
-
+const Post = ({ username, caption, selectedFile, createAt }) => {
     return (
-        <Card sx={{ maxWidth: 345 }}>
+        <Card sx={{ maxWidth: "40%", margin: "auto", mt: 2, padding: 2 }}>
             <CardHeader
                 avatar={
-                    <Avatar sx={{ bgcolor: red[500] }}>
-                        R
+                    <Avatar sx={{ bgcolor: "red" }} aria-label="recipe">
+                        U
                     </Avatar>
                 }
                 action={
@@ -26,28 +23,27 @@ const Post = ({ post }) => {
                         <MoreVertIcon />
                     </IconButton>
                 }
-                title={post.creator}
+                title={username}
             />
             <CardMedia
                 component="img"
                 height="194"
-                image={post.selectedFile}
+                image={selectedFile}
+                alt="post"
             />
             <CardContent>
-                <Typography variant="body2" color="text.secondary">
-                    This impressive paella is a perfect party dish and a fun meal to cook
-                    together with your guests. Add 1 cup of frozen peas along with the mussels,
-                    if you like.
+                <Typography variant="body2" sx={{ fontSize: 15 }}>
+                    <b>{username}</b> {caption}
                 </Typography>
-            </CardContent>
-            <CardActions disableSpacing>
-                <IconButton aria-label="add to favorites" onClick={() => { }}>
+                <Typography color="text.secondary" sx={{ fontSize: 10 }} >
+                    {createAt}
+                </Typography>
+                <IconButton aria-label="add to favorites">
                     <FavoriteIcon />
-                    {post.likeCount}
                 </IconButton>
-            </CardActions>
+            </CardContent>
         </Card>
     );
 }
 
-export default Post;
+export default Post
