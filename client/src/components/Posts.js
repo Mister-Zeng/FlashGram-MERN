@@ -17,8 +17,6 @@ const Posts = () => {
             .then(data => setPosts(data.posts))
     }, []);
 
-    console.log(posts);
-
     return (
         <div>
             {posts &&

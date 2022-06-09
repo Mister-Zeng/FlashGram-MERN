@@ -10,6 +10,5 @@ postRouter.put('/update/:id', updatePost)
 postRouter.get('/:id', getById)
 postRouter.delete('/:id', deletePost)
 postRouter.get('/user/:id', getUserById)
-postRouter.put('/:id/likePost', likePost);
 
 export default postRouter; 

@@ -7,8 +7,6 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 const Post = ({ username, caption, selectedFile, createAt, isUser, id }) => {
-    console.log(isUser)
-    console.log(id)
     const navigate = useNavigate();
 
     const handleEdit = (e) => {
@@ -19,7 +17,6 @@ const Post = ({ username, caption, selectedFile, createAt, isUser, id }) => {
         const res = await axios.delete(`/post/${id}`)
             .catch(error => console.log(error));
         const data = await res.data;
-        console.log(data)
         return data;
     }
     const handleDelete = () => {

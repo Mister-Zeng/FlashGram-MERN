@@ -34,13 +34,12 @@ const Auth = () => {
             password: inputs.password,
         }).catch(error => console.log(error))
         const data = await res.data;
-        console.log(data)
         return data;
     }
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(inputs)
+
         if (isSignup) {
             sendRequest("signup")
                 .then((data) => {

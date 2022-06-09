@@ -21,7 +21,6 @@ const UserPosts = () => {
             .then((data) => setUser(data.user))
     }, [])
 
-    console.log(user)
 
     return (
         <div>

@@ -29,7 +29,6 @@ const AddPost = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(inputs);
         sendRequest()
             .then((data) => console.log(data))
             .then(() => navigate('/myposts'))
