@@ -43,18 +43,18 @@ const Auth = () => {
         console.log(inputs)
         if (isSignup) {
             sendRequest("signup")
-                .then(() => dispatch(authActions.login()))
                 .then((data) => {
-                    navigate("/posts")
-                    localStorage.setItem('token', data.user)
-                })
+                    dispatch(authActions.login());
+                    localStorage.setItem('userId', data.user._id);
+                    navigate("/posts");
+                });
         } else {
             sendRequest("login")
-                .then(() => dispatch(authActions.login()))
                 .then((data) => {
-                    navigate("/posts")
-                    localStorage.setItem('token', data.user)
-                })
+                    dispatch(authActions.login());
+                    localStorage.setItem('userId', data.user._id);
+                    navigate("/posts");
+                });
         }
     }
 

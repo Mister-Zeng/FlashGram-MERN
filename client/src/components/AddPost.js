@@ -1,13 +1,12 @@
-import { Typography, InputLabel, Box, TextField, Button } from '@mui/material';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import FileBase from 'react-file-base64';
-import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
+import { Typography, InputLabel, Box, TextField, Button } from '@mui/material';
 
 const AddPost = () => {
+    const navigate = useNavigate();
     const [inputs, setInputs] = useState({ caption: '', selectedFile: '' });
-
-    const dispatch = useDispatch();
 
     const handleChange = (e) => {
         setInputs((prevState) => ({
@@ -21,7 +20,8 @@ const AddPost = () => {
             caption: inputs.caption,
             selectedFile: inputs.selectedFile,
             user: localStorage.getItem("userId"),
-            createAt: new Date()
+            createAt: new Date(),
+            username: localStorage.getItem("username")
         }).catch((error) => console.log(error))
         const data = await res.data;
         return data;
@@ -32,6 +32,7 @@ const AddPost = () => {
         console.log(inputs);
         sendRequest()
             .then((data) => console.log(data))
+            .then(() => navigate('/myposts'))
     }
 
     return (

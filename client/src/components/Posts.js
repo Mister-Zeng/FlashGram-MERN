@@ -24,13 +24,15 @@ const Posts = () => {
             {posts &&
                 posts.map((post, index) => (
                     <Post
+                        id={post._id}
+                        isUser={localStorage.getItem("userId") === post.user._id}
                         key={index}
                         username={post.user.username}
                         caption={post.caption}
                         selectedFile={post.selectedFile}
                         createAt={post.createAt}
                     />
-                ))}
+                )).reverse()}
         </div>
     )
 }

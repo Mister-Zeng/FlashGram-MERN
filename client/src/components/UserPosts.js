@@ -4,15 +4,19 @@ import Post from './Post';
 
 const UserPosts = () => {
     const [user, setUser] = useState()
-    const id = localStorage.getItem("token");
-    const sendRequest = async () => {
-        const res = await axios.get(`/post/user/${id}`)
-            .catch(error => console.log(error));
-        const data = await res.data;
-        console.log(data)
-        return data;
-    }
+
+
     useEffect(() => {
+        const id = localStorage.getItem("userId");
+        const sendRequest = async () => {
+            const res = await axios.get(`/post/user/${id}`)
+                .catch(error => console.log(error));
+            const data = await res.data;
+            console.log(data)
+            return data;
+
+        }
+
         sendRequest()
             .then((data) => setUser(data.user))
     }, [])
@@ -24,13 +28,15 @@ const UserPosts = () => {
             {user &&
                 user.posts.map((post, index) => (
                     <Post
+                        id={post._id}
+                        isUser={true}
                         key={index}
-                        username={post.user.username}
+                        username={user.username}
                         caption={post.caption}
                         selectedFile={post.selectedFile}
                         createAt={post.createAt}
                     />
-                ))}
+                )).reverse()}
         </div>
     )
 }
