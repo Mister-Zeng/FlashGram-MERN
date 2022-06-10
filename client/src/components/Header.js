@@ -30,8 +30,13 @@ const Header = () => {
                     ) : (
                         <>
                             {isLoggedIn && (
-                                <Box display="flex" marginLeft="auto" marginRight="auto">
-                                    <Tabs textColor='inherit' value={value} onChange={handleChange}>
+                                <Box display="flex" marginLeft="auto">
+                                    <Tabs textColor="inherit" sx={{ color: "black" }} value={value} onChange={handleChange}
+                                        TabIndicatorProps={{
+                                            style: {
+                                                backgroundColor: "black"
+                                            }
+                                        }}>
                                         <Tab component={NavLink} to='/posts' label="All Posts" />
                                         <Tab component={NavLink} to='/myposts' label="My Posts" />
                                         <Tab component={NavLink} to='/posts/add' label="Add Post" />
@@ -40,15 +45,15 @@ const Header = () => {
                             )}
                             <Box display="flex" marginLeft="auto">
                                 {!isLoggedIn && <>
-                                    <Button sx={{ margin: 1 }} color="warning" variant="contained" component={NavLink} to='/auth'>
+                                    <Button sx={{ margin: 1, color: "black" }} color="warning" variant="contained" component={NavLink} to='/auth'>
                                         Login
                                     </Button>
-                                    <Button sx={{ margin: 1 }} color="warning" variant="contained" component={NavLink} to='/auth'>
+                                    <Button sx={{ margin: 1, color: "black" }} color="warning" variant="contained" component={NavLink} to='/auth'>
                                         Signup
                                     </Button> </>
                                 }
                                 {isLoggedIn && (
-                                    <Button onClick={() => dispatch(authActions.logout())} sx={{ margin: 1 }} color="warning" variant="contained" component={NavLink} to='/auth'>
+                                    <Button onClick={() => dispatch(authActions.logout())} sx={{ margin: 1, color: "black" }} color="warning" variant="contained" component={NavLink} to='/auth'>
                                         Logout
                                     </Button>
                                 )}

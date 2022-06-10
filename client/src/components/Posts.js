@@ -11,7 +11,7 @@ const Posts = () => {
         const data = await res.data;
         return data
     };
-
+    console.log(posts)
     useEffect(() => {
         sendRequest()
             .then(data => setPosts(data.posts))

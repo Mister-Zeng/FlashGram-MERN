@@ -5,7 +5,7 @@ export const DrawerComponent = () => {
     const [openDrawer, setOpenDrawer] = useState(false)
 
     return (
-        <div>
+        <div >
             <Drawer open={openDrawer} onClose={() => setOpenDrawer(false)}>
                 <List>
                     <ListItemButton>
@@ -18,6 +18,6 @@ export const DrawerComponent = () => {
             <IconButton onClick={() => setOpenDrawer(!openDrawer)}>
                 <MenuIcon />
             </IconButton>
-        </div>
+        </div >
     )
 }
