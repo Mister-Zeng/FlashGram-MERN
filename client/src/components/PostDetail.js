@@ -56,10 +56,10 @@ const PostDetail = () => {
             {inputs &&
                 <form onSubmit={handleSubmit}>
                     <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" boxShadow=" 10px 10px 20px #ccc" maxWidth={500} margin="auto" padding={3} marginTop={10} borderRadius={5}>
-                        <Typography fontWeight={"bold"} padding={3} textAlign={"center"} fontSize={22}>Edit Your Post</Typography>
+                        <Typography fontWeight={"bold"} padding={3} textAlign={"center"} fontSize={22} fontFamily="georgia">Edit Your Post</Typography>
                         <InputLabel sx={{ mb: 1, mt: 2, fontSize: 15 }}>Caption</InputLabel>
                         <TextField value={inputs.caption} name="caption" onChange={handleChange} fullWidth />
-                        <Button variant="contained" type="submit">Submit</Button>
+                        <Button variant="contained" type="submit" color="warning" sx={{ marginTop: 3 }}>Submit</Button>
                     </Box>
                 </form>
             }

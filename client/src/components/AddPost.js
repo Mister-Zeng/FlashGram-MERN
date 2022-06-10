@@ -38,11 +38,11 @@ const AddPost = () => {
         <div>
             <form onSubmit={handleSubmit}>
                 <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" boxShadow=" 10px 10px 20px #ccc" maxWidth={500} margin="auto" padding={3} marginTop={10} borderRadius={5}>
-                    <Typography fontWeight={"bold"} padding={3} textAlign={"center"} fontSize={22}>Add Your Post</Typography>
+                    <Typography fontWeight={"bold"} padding={3} textAlign={"center"} fontSize={22} fontFamily="georgia">Add Your Post</Typography>
                     <FileBase type="file" multiple={false} onDone={({ base64 }) => setInputs({ ...inputs, selectedFile: base64 })} />
                     <InputLabel sx={{ mb: 1, mt: 2, fontSize: 15 }}>Caption</InputLabel>
                     <TextField value={inputs.caption} name="caption" onChange={handleChange} fullWidth />
-                    <Button variant="contained" type="submit">Submit</Button>
+                    <Button variant="contained" color="warning" type="submit" sx={{ marginTop: 3 }}>Submit</Button>
                 </Box>
             </form>
         </div>

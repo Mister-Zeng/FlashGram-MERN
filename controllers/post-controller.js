@@ -109,15 +109,3 @@ export const getUserById = async (req, res) => {
     }
     res.status(200).json({ user: userPosts })
 }
-
-export const likePost = async (req, res) => {
-    const { postId } = req.params;
-
-    if (!mongoose.Types.ObjectId.isValid(postId)) return res.status(404).send(`No post with id: ${postId}`);
-
-    const post = await PostMessage.findById(postId);
-
-    const updatedPost = await PostMessage.findByIdAndUpdate(postId, { likeCount: post.likeCount + 1 }, { new: true });
-
-    res.status(200).json(updatedPost);
-}

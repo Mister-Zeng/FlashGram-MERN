@@ -7,7 +7,8 @@ const userSchema = new mongoose.Schema({
     },
     username: {
         type: String,
-        required: true
+        required: true,
+        uppercase: true
     },
     email: {
         type: String,
@@ -18,9 +19,6 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
         minlength: 6
-    },
-    quote: {
-        type: String
     },
     posts: [{ type: mongoose.Types.ObjectId, ref: "Post", required: true }]
 });
