@@ -7,7 +7,7 @@ export const getAllPosts = async (req, res) => {
     try {
         posts = await Post.find().populate('user')
     } catch (error) {
-        console.log(error)
+        console.log(error.message)
     }
     if (!posts) {
         res.status(404).json({ message: "No Posts Found" })

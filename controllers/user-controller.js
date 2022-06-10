@@ -68,4 +68,3 @@ export const login = async (req, res) => {
 
     res.status(200).json({ message: "Successfully signed in.", user: existingUser });
 };
-
