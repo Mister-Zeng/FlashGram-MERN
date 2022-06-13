@@ -9,6 +9,7 @@ import Posts from './components/Posts';
 import UserPosts from './components/UserPosts';
 import PostDetail from './components/PostDetail';
 import AddPost from './components/AddPost';
+import MainPage from "./components/MainPage";
 
 function App() {
   const dispatch = useDispatch()
@@ -27,6 +28,7 @@ function App() {
       </header>
       <main>
         <Routes>
+          <Route path="/" element={<MainPage />} />
           {!isLoggedIn ? (
             <>
               <Route path="/login" element={<Login />} />

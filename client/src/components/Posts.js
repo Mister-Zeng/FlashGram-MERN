@@ -18,7 +18,7 @@ const Posts = () => {
     }, []);
 
     return (
-        <div>
+        <div className="posts">
             {posts &&
                 posts.map((post, index) => (
                     <Post

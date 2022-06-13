@@ -19,7 +19,7 @@ const Header = () => {
     return (
         <React.Fragment>
             <AppBar position="static" sx={{
-                background: "radial-gradient(circle, rgba(251, 252, 67, 1) 0%, rgba(250, 166, 8, 1) 39%, rgba(237, 131, 58, 1) 67%, rgba(255, 0, 0, 1) 100%)"
+                background: "linear-gradient(168deg, rgba(251, 252, 67, 1) 0%, rgba(250, 166, 8, 1) 39%, rgba(237, 131, 58, 1) 67%, rgba(255, 0, 0, 1) 100%)"
             }}>
                 <Toolbar>
                     <Typography variant="h4"><img width={"70px"} src={logo} alt="logo" /></Typography>
@@ -31,7 +31,7 @@ const Header = () => {
                         ) : (
                             <>
                                 {isLoggedIn && (
-                                    <Box display="flex">
+                                    <Box display="flex" marginLeft="auto">
                                         <Tabs textColor="inherit" sx={{ color: "black" }} value={value} onChange={handleChange}
                                             TabIndicatorProps={{
                                                 style: {
@@ -44,7 +44,7 @@ const Header = () => {
                                         </Tabs>
                                     </Box>
                                 )}
-                                <Box display="flex" marginLeft="auto">
+                                <Box>
                                     {!isLoggedIn && <>
                                         <Button sx={{ margin: 1, color: "black" }} color="warning" variant="contained" component={NavLink} to='/login'>
                                             Login

@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { Drawer, List, ListItemButton, ListItemText, IconButton, ListItemIcon } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import CancelIcon from '@mui/icons-material/Cancel';
 import { authActions } from '../store';
 
 const DrawerComponent = () => {
@@ -16,26 +17,29 @@ const DrawerComponent = () => {
 
     return (
         <React.Fragment>
-            <Drawer open={openDrawer} onClose={() => setOpenDrawer(false)}>
+            <Drawer anchor="top" open={openDrawer} onClose={() => setOpenDrawer(false)}>
                 {isLoggedIn && <>
-                    <List>
+                    <List sx={{ bgcolor: "white", textAlign: "center" }}>
+                        <IconButton onClick={() => setOpenDrawer(false)} sx={{ display: "flex", marginLeft: "auto" }}>
+                            <CancelIcon />
+                        </IconButton>
                         <ListItemButton onClick={() => setOpenDrawer(false)} component={NavLink} to='/posts' >
-                            <ListItemIcon>
+                            <ListItemIcon sx={{ display: "flex", margin: "auto" }}>
                                 <ListItemText>All Posts</ListItemText>
                             </ListItemIcon>
                         </ListItemButton>
                         <ListItemButton onClick={() => setOpenDrawer(false)} component={NavLink} to='/myposts'>
-                            <ListItemIcon>
+                            <ListItemIcon sx={{ display: "flex", margin: "auto" }}>
                                 <ListItemText>My Posts</ListItemText>
                             </ListItemIcon>
                         </ListItemButton>
                         <ListItemButton onClick={() => setOpenDrawer(false)} component={NavLink} to='/posts/add'>
-                            <ListItemIcon>
+                            <ListItemIcon sx={{ display: "flex", margin: "auto" }}>
                                 <ListItemText>Add Post</ListItemText>
                             </ListItemIcon>
                         </ListItemButton>
                         <ListItemButton onClick={handleLogOutNav} component={NavLink} to='/auth'>
-                            <ListItemIcon>
+                            <ListItemIcon sx={{ display: "flex", margin: "auto" }}>
                                 <ListItemText>Log out</ListItemText>
                             </ListItemIcon>
                         </ListItemButton>

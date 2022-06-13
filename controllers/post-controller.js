@@ -12,7 +12,7 @@ export const getAllPosts = async (req, res) => {
     if (!posts) {
         return res.status(404).json({ message: "No Posts Found" })
     }
-    return res.status(200).json({ posts })
+    res.status(200).json({ posts })
 }
 
 export const addPost = async (req, res) => {
@@ -25,7 +25,7 @@ export const addPost = async (req, res) => {
         console.log(error);
     }
     if (!existingUser) {
-        res.status(400).json({ message: "Unable To Find User By This ID" })
+        return res.status(400).json({ message: "Unable To Find User By This ID" })
     }
     const post = new Post({
         user,
@@ -43,9 +43,9 @@ export const addPost = async (req, res) => {
         await session.commitTransaction();
     } catch (error) {
         console.log(error)
-        return res.status(500).json({ message: error })
+        res.status(500).json({ message: error })
     }
-    return res.status(200).json({ post })
+    res.status(200).json({ post })
 };
 
 export const updatePost = async (req, res) => {
@@ -62,7 +62,7 @@ export const updatePost = async (req, res) => {
     if (!post) {
         return res.status(500).json({ message: "Unable To Update The Post" })
     }
-    return res.status(200).json({ post });
+    res.status(200).json({ post });
 }
 
 export const getById = async (req, res) => {
@@ -76,7 +76,7 @@ export const getById = async (req, res) => {
     if (!post) {
         return res.status(404).json({ message: "No Post Found" })
     }
-    return res.status(200).json({ post })
+    res.status(200).json({ post })
 }
 
 export const deletePost = async (req, res) => {
@@ -92,7 +92,7 @@ export const deletePost = async (req, res) => {
     if (!post) {
         return res.status(500).json({ message: "Unable To Delete" })
     }
-    return res.status(200).json({ message: "Deleted Successfully" })
+    res.status(200).json({ message: "Deleted Successfully" })
 }
 
 export const getUserById = async (req, res) => {
@@ -107,5 +107,5 @@ export const getUserById = async (req, res) => {
     if (!userPosts) {
         return res.status(404).json({ message: "No Post Found" })
     }
-    return res.status(200).json({ user: userPosts })
+    res.status(200).json({ user: userPosts })
 }
