@@ -24,7 +24,7 @@ const Login = () => {
     }
 
     const sendRequest = async () => {
-        const res = await axios.post("/user/signup", {
+        const res = await axios.post("/user/login", {
             username: inputs.username,
             password: inputs.password,
         }).catch(error => console.log(error))
@@ -34,10 +34,11 @@ const Login = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        sendRequest("login")
+        sendRequest()
             .then((data) => {
                 dispatch(authActions.login());
                 localStorage.setItem('userId', data.user._id);
+                console.log(data)
                 navigate("/posts");
             });
     }

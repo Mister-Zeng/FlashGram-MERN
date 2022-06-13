@@ -8,19 +8,17 @@ const UserPosts = () => {
 
     useEffect(() => {
         const id = localStorage.getItem("userId");
+        console.log(id)
         const sendRequest = async () => {
             const res = await axios.get(`/post/user/${id}`)
                 .catch(error => console.log(error));
             const data = await res.data;
-            console.log(data)
             return data;
-
         }
 
         sendRequest()
             .then((data) => setUser(data.user))
     }, [])
-
 
     return (
         <div>
