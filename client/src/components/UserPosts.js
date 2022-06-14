@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Post from './Post';
+import moment from 'moment';
 
 const UserPosts = () => {
     const [user, setUser] = useState()
@@ -31,7 +32,7 @@ const UserPosts = () => {
                         username={user.username}
                         caption={post.caption}
                         selectedFile={post.selectedFile}
-                        createAt={post.createAt}
+                        createAt={moment(post.createAt).format('MMM Do YY')}
                     />
                 )).reverse()}
         </div>
