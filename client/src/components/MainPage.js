@@ -8,9 +8,9 @@ const MainPage = () => {
     const isMatch = useMediaQuery(theme.breakpoints.down('md'))
 
     const outerBoxStyle = isMatch ? { display: "flex", justifyContent: "center", alignContent: "center", flexDirection: "column", padding: "60px 10px 10px 10px" } : { display: "flex", justifyContent: "center", alignContent: "center", flexDirection: "row", paddingTop: 20 };
-    const aboutBoxStyle = isMatch ? { paddingTop: 8 } : { width: 700, paddingTop: 8 };
+    const aboutBoxStyle = isMatch ? { paddingTop: 8 } : { width: 700, paddingTop: 5 };
     const imageStyle = isMatch && { width: "100%" }
-    const aboutTitleTypographyStyle = isMatch ? { fontSize: 26, fontWeight: "bold", fontFamily: "sans-serif", textAlign: "center", paddingBottom: 5 } : { fontSize: 30, fontWeight: "bold", fontFamily: "sans-serif", textAlign: "center", paddingBottom: 5 };
+    const aboutTitleTypographyStyle = isMatch ? { fontSize: 26, fontWeight: "bold", fontFamily: "sans-serif", textAlign: "center", paddingBottom: 2 } : { fontSize: 30, fontWeight: "bold", fontFamily: "sans-serif", textAlign: "center", paddingBottom: 5 };
     const aboutDescriptionTypographyStyle = isMatch ? { fontSize: 20, fontFamily: "sans-serif", textAlign: "center" } : { fontSize: 20, fontFamily: "sans-serif", textAlign: "center" }
 
     return (
