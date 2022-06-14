@@ -32,14 +32,14 @@ Users should be able to:
 
 ### Screenshot
 
-![](/coming soon)
+![](./client/src/images/demo.gif)
 
 ### Links
 
 - Solution URL: [https://github.com/Mister-Zeng/FlashGram-MERN]
 - Live Site URL: [https://flashgram.herokuapp.com]
 
-### Login Crendential / Or Register Your Own
+### Login crendential / Register your own
 
 Username: jakebonds110
 Password: test123
