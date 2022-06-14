@@ -8,14 +8,8 @@
     "npm": "8.3.1"
   },
   "scripts": {
-<<<<<<< HEAD
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js"
-=======
-    "start": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "heroku-postbuild": "cd client && npm install && npm run build"
->>>>>>> 3fd80993fcca0b40e2c6426ad365d5c9674c3a5b
   },
   "type": "module",
   "keywords": [],
@@ -27,18 +21,9 @@
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "moment": "^2.29.3",
-<<<<<<< HEAD
     "mongoose": "^6.3.5",
     "nodemon": "^2.0.16",
     "path": "^0.12.7",
     "url": "^0.11.0"
   }
 }
-=======
-    "mongoose": "^6.3.5"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.16"
-  }
-}
->>>>>>> 3fd80993fcca0b40e2c6426ad365d5c9674c3a5b
