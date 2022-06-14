@@ -18,7 +18,7 @@ const Header = () => {
     };
     return (
         <React.Fragment>
-            <AppBar position="static" sx={{
+            <AppBar position="sticky" sx={{
                 background: "linear-gradient(168deg, rgba(251, 252, 67, 1) 0%, rgba(250, 166, 8, 1) 39%, rgba(237, 131, 58, 1) 67%, rgba(255, 0, 0, 1) 100%)"
             }}>
                 <Toolbar>
