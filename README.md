@@ -36,7 +36,13 @@ Users should be able to:
 ### Links
 
 - Solution URL: [https://github.com/Mister-Zeng/FlashGram-MERN]
-- Live Site URL: [coming soon..]
+- Live Site URL: [https://flashgram.herokuapp.com]
+
+### Login Crendential
+
+Username: jakebonds110
+Password: test123
+
 ## My process
 
 ### Built with
