@@ -11,8 +11,8 @@ const MainPage = () => {
             {
                 isMatch ? (
                     <>
-                        <Box sx={{ display: "flex", justifyContent: "center", alignContent: "center", flexDirection: "column", padding: "100px 10px 10px 10px" }}>
-                            <Box component="img" src={LandingImage} />
+                        <Box sx={{ display: "flex", justifyContent: "center", alignContent: "center", flexDirection: "column", padding: "60px 10px 10px 10px" }}>
+                            <Box component="img" src={LandingImage} sx={{ width: "100%" }} />
                             <Box sx={{ paddingTop: 8 }}>
                                 <Typography sx={{ fontSize: 26, fontWeight: "bold", fontFamily: "sans-serif", textAlign: "center", paddingBottom: 5 }}>About us</Typography>
                                 <Typography sx={{ fontSize: 16, fontFamily: "sans-serif", textAlign: "center" }}>We are a social media company that aim for <b>diversity</b> and <b>inclusion</b>. We're <b>committed</b> to

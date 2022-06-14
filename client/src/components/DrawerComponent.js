@@ -38,7 +38,7 @@ const DrawerComponent = () => {
                                 <ListItemText>Add Post</ListItemText>
                             </ListItemIcon>
                         </ListItemButton>
-                        <ListItemButton onClick={handleLogOutNav} component={NavLink} to='/auth'>
+                        <ListItemButton onClick={handleLogOutNav} component={NavLink} to='/'>
                             <ListItemIcon sx={{ display: "flex", margin: "auto" }}>
                                 <ListItemText>Log out</ListItemText>
                             </ListItemIcon>

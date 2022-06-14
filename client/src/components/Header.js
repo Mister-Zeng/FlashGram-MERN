@@ -56,7 +56,7 @@ const Header = () => {
                                 </>
                                 }
                                 {isLoggedIn && (
-                                    <Button onClick={() => dispatch(authActions.logout())} sx={{ margin: 1, color: "black" }} color="warning" variant="contained" component={NavLink} to='/login'>
+                                    <Button onClick={() => dispatch(authActions.logout())} sx={{ margin: 1, color: "black" }} color="warning" variant="contained" component={NavLink} to='/'>
                                         Log out
                                     </Button>
                                 )}
