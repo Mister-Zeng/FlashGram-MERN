@@ -41,8 +41,8 @@ Users should be able to:
 
 ### Login crendential / Register your own
 
-Username: jakebonds110
-Password: test123
+- Username: jakebonds110
+- Password: test123
 
 ## My process
 
