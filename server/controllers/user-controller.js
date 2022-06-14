@@ -9,7 +9,7 @@ export const getAllUser = async (req, res) => {
         console.log(error);
     }
     if (!users) {
-        res.status(404).json({ message: "No Users Found" })
+        return res.status(404).json({ message: "No Users Found" })
     }
     res.status(200).json({ users });
 };
@@ -26,7 +26,7 @@ export const signup = async (req, res) => {
 
 
     if (existingUser) {
-        res.status(400).json({ message: "User Already Exists. Login Instead" })
+        return res.status(400).json({ message: "User Already Exists. Login Instead" })
     }
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
@@ -58,12 +58,12 @@ export const login = async (req, res) => {
     };
 
     if (!existingUser) {
-        res.status(404).json({ message: "Couldnt Find User By This Email" })
+        return res.status(404).json({ message: "Couldnt Find User By This Email" })
     }
 
     const isPasswordCorrect = bcrypt.compare(password, existingUser.password);
     if (!isPasswordCorrect) {
-        res.status(400).json({ message: "Incorrect Password" })
+        return res.status(400).json({ message: "Incorrect Password" })
     }
 
     res.status(200).json({ message: "Successfully signed in.", user: existingUser });
