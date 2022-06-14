@@ -3,9 +3,14 @@ import { getAllUser, signup, login } from "../controllers/user-controller.js";
 
 const userRouter = express.Router();
 
+const usernameToLowerCase = (req, res, next) => {
+    req.body.username = req.body.username.toLowerCase();
+    next();
+}
+
 userRouter.get('/', getAllUser);
-userRouter.post('/signup', signup)
-userRouter.post('/login', login)
+userRouter.post('/signup', usernameToLowerCase, signup)
+userRouter.post('/login', usernameToLowerCase, login)
 
 export default userRouter;
 

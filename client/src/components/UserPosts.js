@@ -29,7 +29,7 @@ const UserPosts = () => {
                         id={post._id}
                         isUser={true}
                         key={index}
-                        username={user.username}
+                        username={user.username.charAt(0).toUpperCase() + user.username.slice(1)}
                         caption={post.caption}
                         selectedFile={post.selectedFile}
                         createAt={moment(post.createAt).format('MMM Do YY')}

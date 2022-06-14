@@ -25,7 +25,7 @@ const Posts = () => {
                         id={post._id}
                         isUser={localStorage.getItem("userId") === post.user._id}
                         key={index}
-                        username={post.user.username}
+                        username={post.user.username.charAt(0).toUpperCase() + post.user.username.slice(1)}
                         caption={post.caption}
                         selectedFile={post.selectedFile}
                         createAt={moment(post.createAt).format('MMM Do YY')}
