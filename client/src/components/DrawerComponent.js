@@ -46,7 +46,7 @@ const DrawerComponent = () => {
                     </List>
                 </>}
                 {!isLoggedIn && <>
-                    <List>
+                    <List sx={{ bgcolor: "white", textAlign: "center" }}>
                         <IconButton onClick={() => setOpenDrawer(false)} sx={{ display: "flex", marginLeft: "auto" }}>
                             <CancelIcon />
                         </IconButton>
