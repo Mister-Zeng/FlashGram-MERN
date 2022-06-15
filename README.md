@@ -42,7 +42,7 @@ Users should be able to:
 
 ### Login crendential / Register your own
 
-- Username: jakebonds110
+- Username: testing123
 - Password: test123
 
 ## My process
