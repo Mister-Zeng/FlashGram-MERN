@@ -26,10 +26,11 @@ app.get("*", (req, res) => {
 const port = process.env.PORT || 5000;
 
 const uri = process.env.ATLAS_URI;
-main().catch(err => console.log(err));
-async function main() {
+
+const main = async () => {
   await mongoose.connect(uri);
 }
+main().catch(err => console.log(err));
 
 const connection = mongoose.connection;
 connection.once("open", () => {

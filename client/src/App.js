@@ -14,6 +14,7 @@ import MainPage from "./components/MainPage";
 function App() {
   const dispatch = useDispatch()
   const isLoggedIn = useSelector(state => state.isLoggedIn)
+  const currentUser = useSelector(state => state.isLoggedIn)
   console.log(isLoggedIn);
 
   useEffect(() => {
@@ -21,6 +22,7 @@ function App() {
       dispatch(authActions.login());
     }
   }, [dispatch])
+
   return (
     <React.Fragment>
       <header>

@@ -61,10 +61,18 @@ export const login = async (req, res) => {
         return res.status(404).json({ message: "Couldnt Find User By This Email" })
     }
 
-    const isPasswordCorrect = bcrypt.compare(password, existingUser.password);
-    if (!isPasswordCorrect) {
+    const correctPassword = await bcrypt.compare(password, existingUser.password);
+
+    if (correctPassword) {
+        res.status(200).json({ message: "Successfully signed in.", user: existingUser });
+    }
+    else {
         return res.status(400).json({ message: "Incorrect Password" })
     }
-
-    res.status(200).json({ message: "Successfully signed in.", user: existingUser });
 };
+
+export const secret = async (req, res) => {
+    if (!req.session.user_id) {
+        res.redirect('/login')
+    }
+}

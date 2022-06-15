@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import moment from 'moment';
 import Post from './Post';
+import { useSelector } from 'react-redux';
 
 const Posts = () => {
+    const currentUser = useSelector(state => state.currentUser)
     const [posts, setPosts] = useState();
     const sendRequest = async () => {
         const res = await axios.get("/post")
@@ -11,7 +13,7 @@ const Posts = () => {
         const data = await res.data;
         return data
     };
-    console.log(posts)
+
     useEffect(() => {
         sendRequest()
             .then(data => setPosts(data.posts))

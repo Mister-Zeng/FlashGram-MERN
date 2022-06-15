@@ -7,23 +7,17 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 const Post = ({ username, caption, selectedFile, createAt, isUser, id }) => {
     const navigate = useNavigate();
+
     const [open, setOpen] = useState(false);
+
     const handleCloseModal = () => setOpen(false);
 
-    const deleteRequest = async () => {
-        const res = await axios.delete(`/post/${id}`)
-            .catch(error => console.log(error));
-        const data = await res.data;
-        return data;
-    };
+    const handleEdit = (e) => {
+        navigate(`/myposts/${id}`)
+    }
 
     const handleDelete = () => {
         setOpen(true);
-    };
-
-    const handleDeleteTrue = () => {
-        deleteRequest()
-            .then(() => navigate('/posts'))
     };
 
     const handleDeleteFalse = () => {
@@ -31,18 +25,27 @@ const Post = ({ username, caption, selectedFile, createAt, isUser, id }) => {
         handleClose()
     };
 
+    const handleDeleteTrue = async () => {
+        try {
+            const res = await axios.delete(`/post/${id}`)
+            const data = await res.data;
+            console.log(data)
+            window.location.reload();
+        } catch (error) {
+            console.log(error.response.data.message);
+        }
+    };
+
     const [anchorEl, setAnchorEl] = useState(null);
     const openAnchor = Boolean(anchorEl);
+
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
+
     const handleClose = () => {
         setAnchorEl(null);
     };
-
-    const handleEdit = (e) => {
-        navigate(`/myposts/${id}`)
-    }
 
     const popupStyle = {
         display: "flex",

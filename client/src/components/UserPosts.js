@@ -2,14 +2,13 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Post from './Post';
 import moment from 'moment';
+import { useSelector } from 'react-redux';
 
 const UserPosts = () => {
     const [user, setUser] = useState()
 
-
     useEffect(() => {
-        const id = localStorage.getItem("userId");
-        console.log(id)
+        const id = localStorage.getItem("userId")
         const sendRequest = async () => {
             const res = await axios.get(`/post/user/${id}`)
                 .catch(error => console.log(error));

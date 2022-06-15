@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, NavLink } from 'react-router-dom';
 import axios from 'axios';
 import { Box, Typography, TextField, Button, InputLabel } from '@mui/material';
@@ -7,6 +7,7 @@ import logo from '../images/logos.png';
 import { authActions } from '../store';
 
 const Login = () => {
+    const loginFailure = useSelector(state => state.error)
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [inputs, setInputs] = useState({
@@ -23,31 +24,29 @@ const Login = () => {
         })
     }
 
-    const sendRequest = async () => {
-        const res = await axios.post("/user/login", {
-            username: inputs.username,
-            password: inputs.password,
-        }).catch(error => console.log(error))
-        const data = await res.data;
-        return data;
-    }
-
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        sendRequest()
-            .then((data) => {
-                dispatch(authActions.login());
-                localStorage.setItem('userId', data.user._id);
-                console.log(data)
-                navigate("/posts");
-            });
-    }
+        try {
+            const res = await axios.post("/user/login", {
+                username: inputs.username,
+                password: inputs.password,
+            })
+            const data = await res.data;
+            dispatch(authActions.login());
+            console.log(data)
+            navigate("/posts");
+            localStorage.setItem('userId', data.user._id);
+        } catch (error) {
+            dispatch(authActions.loginFailure());
+            console.log(error.response.data.message);
+        }
 
+    }
 
     return (
         <div>
             <form onSubmit={handleSubmit}>
-                <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" boxShadow=" 10px 10px 20px #ccc" maxWidth={500} margin="auto" padding={3} marginTop={10} borderRadius={5}>
+                <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", boxShadow: " 10px 10px 20px #ccc", maxWidth: 500, margin: "auto", padding: 3, marginTop: 10, borderRadius: 5 }}>
                     <Box component="img" src={logo} sx={{ width: 200 }} />
                     <Typography sx={{ fontSize: 25 }}>Welcome Back!</Typography>
                     <Typography>New to FlashGram?
@@ -59,6 +58,9 @@ const Login = () => {
                         <TextField onChange={handleChange} name="username" value={inputs.username} required label="Required" placeholder='Username' margin="normal" fullWidth />
                         <InputLabel>Password</InputLabel>
                         <TextField onChange={handleChange} name="password" value={inputs.password} required label="Required" type="password" placeholder='Password' margin="normal" fullWidth />
+                        {loginFailure &&
+                            <Typography sx={{ color: "red" }}>Invalid username or password</Typography>
+                        }
                     </Box>
                     <Button type="submit" variant="outlined" color="warning" sx={{ marginTop: 2 }}> Login </Button>
                 </Box>

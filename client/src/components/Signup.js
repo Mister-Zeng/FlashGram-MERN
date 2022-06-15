@@ -25,26 +25,22 @@ const Signup = () => {
         })
     }
 
-    const sendRequest = async () => {
-        const res = await axios.post("/user/signup", {
-            name: inputs.name,
-            email: inputs.email,
-            username: inputs.username,
-            password: inputs.password,
-        }).catch(error => console.log(error))
-        const data = await res.data;
-        return data;
-    }
-
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
-
-        sendRequest("signup")
-            .then((data) => {
-                dispatch(authActions.login());
-                localStorage.setItem('userId', data.user._id);
-                navigate("/posts");
-            });
+        try {
+            const res = await axios.post("/user/signup", {
+                name: inputs.name,
+                email: inputs.email,
+                username: inputs.username,
+                password: inputs.password,
+            })
+            const data = await res.data;
+            dispatch(authActions.login());
+            localStorage.setItem('userId', data.user._id);
+            navigate("/posts");
+        } catch (error) {
+            console.log(error.response.data.message)
+        }
     }
 
     return (
