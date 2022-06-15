@@ -47,6 +47,9 @@ const DrawerComponent = () => {
                 </>}
                 {!isLoggedIn && <>
                     <List>
+                        <IconButton onClick={() => setOpenDrawer(false)} sx={{ display: "flex", marginLeft: "auto" }}>
+                            <CancelIcon />
+                        </IconButton>
                         <ListItemButton onClick={() => setOpenDrawer(false)} component={NavLink} to='/login'>
                             <ListItemIcon>
                                 <ListItemText>Login</ListItemText>
