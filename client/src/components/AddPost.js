@@ -23,14 +23,13 @@ const AddPost = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post("/post/add", {
+            const { data } = await axios.post("/post/add", {
                 caption: inputs.caption,
                 selectedFile: inputs.selectedFile,
                 user: localStorage.getItem("userId"),
                 createAt: new Date(),
                 username: localStorage.getItem("username")
             })
-            const data = await res.data;
             console.log(data);
             navigate('/myposts')
         } catch (error) {

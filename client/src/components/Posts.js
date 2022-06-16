@@ -2,21 +2,16 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import moment from 'moment';
 import Post from './Post';
-import { useSelector } from 'react-redux';
 
 const Posts = () => {
-    const currentUser = useSelector(state => state.currentUser)
     const [posts, setPosts] = useState();
-    const sendRequest = async () => {
-        const res = await axios.get("/post")
-            .catch(error => console.log(error))
-        const data = await res.data;
-        return data
-    };
 
     useEffect(() => {
-        sendRequest()
-            .then(data => setPosts(data.posts))
+        const sendRequest = async () => {
+            const { data } = await axios.get("/post")
+            return data;
+        }
+        sendRequest().then(data => setPosts(data.posts))
     }, []);
 
     return (

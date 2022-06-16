@@ -6,7 +6,8 @@ const authSlice = createSlice({
         currentUser: null,
         isLoggedIn: false,
         error: false,
-        missingFile: null
+        missingFile: null,
+        posts: []
     },
     reducers: {
         login(state, action) {
@@ -27,6 +28,9 @@ const authSlice = createSlice({
         },
         fileUploaded(state) {
             state.missingFile = false
+        },
+        like(state, action) {
+            state.posts = action.payload
         }
     }
 })

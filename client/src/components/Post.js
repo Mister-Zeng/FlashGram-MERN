@@ -4,17 +4,32 @@ import axios from 'axios';
 import { Card, CardHeader, CardMedia, CardContent, Avatar, Typography, Box, Modal, Button, MenuItem, Menu } from '@mui/material';
 import profile from '../images/profile.jpeg'
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import { authActions } from '../store';
+import { useSelector, useDispatch } from 'react-redux';
 
 const Post = ({ username, caption, selectedFile, createAt, isUser, id }) => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const [open, setOpen] = useState(false);
-
-    const handleCloseModal = () => setOpen(false);
 
     const handleEdit = (e) => {
         navigate(`/myposts/${id}`)
     }
+
+    const post = useSelector(state => state.posts)
+    const likePost = async () => {
+        try {
+            const { data } = await axios.patch(`post/${id}/likePost`)
+            dispatch(authActions.like(data))
+            console.log(data)
+        } catch (error) {
+            console.log(error.response.data.message);
+        }
+    };
+
+    const handleCloseModal = () => setOpen(false);
 
     const handleDelete = () => {
         setOpen(true);
@@ -27,8 +42,7 @@ const Post = ({ username, caption, selectedFile, createAt, isUser, id }) => {
 
     const handleDeleteTrue = async () => {
         try {
-            const res = await axios.delete(`/post/${id}`)
-            const data = await res.data;
+            const { data } = await axios.delete(`/post/${id}`)
             console.log(data)
             window.location.reload();
         } catch (error) {
@@ -114,11 +128,14 @@ const Post = ({ username, caption, selectedFile, createAt, isUser, id }) => {
             />
             < CardMedia
                 component="img"
-                height="375"
+                height="350"
                 image={selectedFile}
                 alt="post"
             />
-            <CardContent>
+            <CardContent sx={{ padding: 1 }}>
+                <Button size="small" style={{ color: "grey", padding: 3, right: 3 }} onClick={likePost}>
+                    <ThumbUpIcon style={{ color: "grey", paddingRight: 3, fontSize: 15 }} /> Like {post.likeCount}
+                </Button>
                 <Typography variant="body2" sx={{ fontSize: 14 }}>
                     <b sx={{ fontSize: 15 }}>{username}</b> {caption}
                 </Typography>

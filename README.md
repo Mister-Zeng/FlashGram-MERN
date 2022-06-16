@@ -24,8 +24,9 @@ Users should be able to:
 
 - Sign up/ login / log out
 - Create posts
-- Edit post
-- Delete post
+- Edit posts
+- Delete posts
+- Like posts
 - View a list of user's posts
 - View a list of posts posted by all users on the app
 - View the optimal layout for each page depending on their device's screen size

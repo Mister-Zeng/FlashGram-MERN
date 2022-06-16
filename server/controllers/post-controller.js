@@ -50,10 +50,10 @@ export const addPost = async (req, res) => {
 
 export const updatePost = async (req, res) => {
     const { caption } = req.body;
-    const postId = req.params.id;
+    const { id } = req.params;
     let post;
     try {
-        post = await Post.findByIdAndUpdate(postId, {
+        post = await Post.findByIdAndUpdate(id, {
             caption
         });
     } catch (error) {
@@ -66,7 +66,7 @@ export const updatePost = async (req, res) => {
 }
 
 export const getById = async (req, res) => {
-    const id = req.params.id;
+    const { id } = req.params;
     let post;
     try {
         post = await Post.findById(id);
@@ -80,7 +80,7 @@ export const getById = async (req, res) => {
 }
 
 export const deletePost = async (req, res) => {
-    const id = req.params.id;
+    const { id } = req.params;
 
     let post;
     try {
@@ -96,11 +96,11 @@ export const deletePost = async (req, res) => {
 }
 
 export const getUserById = async (req, res) => {
-    const userId = req.params.id;
+    const { id } = req.params;
 
     let userPosts;
     try {
-        userPosts = await User.findById(userId).populate("posts");
+        userPosts = await User.findById(id).populate("posts");
     } catch (error) {
         console.log(error)
     }
@@ -108,4 +108,16 @@ export const getUserById = async (req, res) => {
         return res.status(404).json({ message: "No Post Found" })
     }
     res.status(200).json({ user: userPosts })
+}
+
+export const likePost = async (req, res) => {
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
+
+    const post = await Post.findById(id);
+
+    const updatedPost = await Post.findByIdAndUpdate(id, { likeCount: post.likeCount + 1 }, { new: true });
+
+    res.status(200).json(updatedPost);
 }
