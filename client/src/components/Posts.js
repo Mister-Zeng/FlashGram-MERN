@@ -3,10 +3,12 @@ import axios from 'axios';
 import moment from 'moment';
 import Post from './Post';
 import LoadingSpinner from './LoadingSpinner';
+import { useSelector } from 'react-redux';
 
 const Posts = () => {
     const [posts, setPosts] = useState();
     const [isLoading, setIsLoading] = useState(true)
+    const post = (state => state.post.posts)
 
     useEffect(() => {
         const sendRequest = async () => {

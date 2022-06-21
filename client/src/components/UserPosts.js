@@ -30,9 +30,9 @@ const UserPosts = () => {
                 {user &&
                     user.posts.map((post, index) => (
                         <Post
+                            key={index}
                             id={post._id}
                             isUser={true}
-                            key={index}
                             username={user.username.charAt(0).toUpperCase() + user.username.slice(1)}
                             caption={post.caption}
                             selectedFile={post.selectedFile}
