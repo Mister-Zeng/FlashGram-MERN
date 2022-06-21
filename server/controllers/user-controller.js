@@ -70,9 +70,3 @@ export const login = async (req, res) => {
         return res.status(400).json({ message: "Incorrect Password" })
     }
 };
-
-export const secret = async (req, res) => {
-    if (!req.session.user_id) {
-        res.redirect('/login')
-    }
-}

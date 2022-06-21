@@ -4,12 +4,12 @@ import FileBase from 'react-file-base64';
 import axios from 'axios';
 import { Typography, InputLabel, Box, TextField, Button } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { authActions } from '../store';
+import { postActions } from '../store/post';
 
 const AddPost = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const missingFile = useSelector(state => state.missingFile)
+    const missingFile = useSelector(state => state.post.missingFile)
     const [inputs, setInputs] = useState({ caption: '', selectedFile: '' });
 
     const handleChange = (e) => {
@@ -28,7 +28,6 @@ const AddPost = () => {
                 selectedFile: inputs.selectedFile,
                 user: localStorage.getItem("userId"),
                 createAt: new Date(),
-                username: localStorage.getItem("username")
             })
             console.log(data);
             navigate('/myposts')
@@ -43,9 +42,9 @@ const AddPost = () => {
         }
 
         if (fileEmpty) {
-            dispatch(authActions.missingFile())
+            dispatch(postActions.missingFile())
             const timer = () => setTimeout(() => {
-                dispatch(authActions.fileUploaded())
+                dispatch(postActions.fileUploaded())
             }, 5000);
             timer()
             clearTimeout(timer);

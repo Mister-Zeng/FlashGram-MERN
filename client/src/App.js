@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { authActions } from "./store";
+import { authActions } from "./store/auth";
 import Header from './components/Header';
 import Signup from './components/Signup';
 import Login from './components/Login';
@@ -13,8 +13,7 @@ import MainPage from "./components/MainPage";
 
 function App() {
   const dispatch = useDispatch()
-  const isLoggedIn = useSelector(state => state.isLoggedIn)
-  const currentUser = useSelector(state => state.isLoggedIn)
+  const isLoggedIn = useSelector(state => state.auth.isLoggedIn)
   console.log(isLoggedIn);
 
   useEffect(() => {

@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { Drawer, List, ListItemButton, ListItemText, IconButton, ListItemIcon } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import CancelIcon from '@mui/icons-material/Cancel';
-import { authActions } from '../store';
+import { authActions } from "../store/auth";
 
 const DrawerComponent = () => {
     const dispatch = useDispatch();

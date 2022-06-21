@@ -4,7 +4,7 @@ import { useNavigate, NavLink } from 'react-router-dom';
 import axios from 'axios';
 import { Box, Typography, TextField, Button, InputLabel } from '@mui/material';
 import logo from '../images/logos.png';
-import { authActions } from '../store';
+import { authActions } from "../store/auth";
 
 const Signup = () => {
     const navigate = useNavigate();

@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { AppBar, Typography, Toolbar, Box, Button, Tab, Tabs, useMediaQuery, useTheme } from '@mui/material';
 import logo from '../images/logos.png';
 import { useSelector, useDispatch } from 'react-redux';
-import { authActions } from '../store';
+import { authActions } from "../store/auth";
 import DrawerComponent from './DrawerComponent';
 
 const Header = () => {
@@ -11,7 +11,7 @@ const Header = () => {
     const isMatch = useMediaQuery(theme.breakpoints.down('md'))
     const dispatch = useDispatch();
     const [value, setValue] = useState(0)
-    const isLoggedIn = useSelector(state => state.isLoggedIn)
+    const isLoggedIn = useSelector(state => state.auth.isLoggedIn)
 
     const handleChange = (event, newValue) => {
         setValue(newValue);

@@ -5,10 +5,10 @@ import { Card, CardHeader, CardMedia, CardContent, Avatar, Typography, Box, Moda
 import profile from '../images/profile.jpeg'
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
-import { authActions } from '../store';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { postActions } from '../store/post';
 
-const Post = ({ username, caption, selectedFile, createAt, isUser, id }) => {
+const Post = ({ username, caption, selectedFile, createAt, isUser, id, likeCount }) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -18,11 +18,10 @@ const Post = ({ username, caption, selectedFile, createAt, isUser, id }) => {
         navigate(`/myposts/${id}`)
     }
 
-    const post = useSelector(state => state.posts)
     const likePost = async () => {
         try {
             const { data } = await axios.patch(`post/${id}/likePost`)
-            dispatch(authActions.like(data))
+            dispatch(postActions.like(data))
             console.log(data)
         } catch (error) {
             console.log(error.response.data.message);
@@ -134,7 +133,7 @@ const Post = ({ username, caption, selectedFile, createAt, isUser, id }) => {
             />
             <CardContent sx={{ padding: 1 }}>
                 <Button size="small" style={{ color: "grey", padding: 3, right: 3 }} onClick={likePost}>
-                    <ThumbUpIcon style={{ color: "grey", paddingRight: 3, fontSize: 15 }} /> Like {post.likeCount}
+                    <ThumbUpIcon style={{ color: "grey", paddingRight: 3, fontSize: 15 }} /> Like {likeCount}
                 </Button>
                 <Typography variant="body2" sx={{ fontSize: 14 }}>
                     <b sx={{ fontSize: 15 }}>{username}</b> {caption}
