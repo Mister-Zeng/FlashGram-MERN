@@ -3,22 +3,18 @@ import axios from 'axios';
 import moment from 'moment';
 import Post from './Post';
 import LoadingSpinner from './LoadingSpinner';
-import { useSelector } from 'react-redux';
 
 const Posts = () => {
     const [posts, setPosts] = useState();
     const [isLoading, setIsLoading] = useState(true)
-    const post = (state => state.post.posts)
 
     useEffect(() => {
         const sendRequest = async () => {
             const { data } = await axios.get("/post")
-            return data;
-        }
-        sendRequest().then(data => {
             setPosts(data.posts);
-            setIsLoading(false);
-        })
+            setIsLoading(false)
+        }
+        sendRequest()
     }, []);
 
     return (
@@ -28,13 +24,13 @@ const Posts = () => {
                     posts.map((post, index) => (
                         <Post
                             id={post._id}
-                            isUser={localStorage.getItem("userId") === post.user._id}
+                            isUser={JSON.parse(localStorage.getItem("user")).user._id === post.user._id}
                             key={index}
                             username={post.user.username.charAt(0).toUpperCase() + post.user.username.slice(1)}
                             caption={post.caption}
                             selectedFile={post.selectedFile}
                             createAt={moment(post.createAt).format('MMM Do YY')}
-                            likeCount={post.likeCount}
+                            likes={post.likes}
                         />
                     )).reverse()}
             </div >

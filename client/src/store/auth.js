@@ -12,7 +12,7 @@ const authSlice = createSlice({
             state.error = false
         },
         logout(state) {
-            localStorage.removeItem("userId")
+            localStorage.removeItem("user")
             state.isLoggedIn = false
         },
         loginFailure: (state) => {

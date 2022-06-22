@@ -13,10 +13,6 @@ const postSlice = createSlice({
         },
         fileUploaded(state) {
             state.missingFile = false
-        },
-        // action for after clicking like button
-        like(state, action) {
-            state.posts = state.posts.map((post) => (post._id === action.payload._id ? action.payload : post))
         }
     }
 })

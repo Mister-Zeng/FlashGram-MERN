@@ -1,18 +1,17 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { Card, CardHeader, CardMedia, CardContent, Avatar, Typography, Box, Modal, Button, MenuItem, Menu } from '@mui/material';
 import profile from '../images/profile.jpeg'
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import { useDispatch } from 'react-redux';
 import { postActions } from '../store/post';
+import api from '../api/api';
+import { useSelector } from 'react-redux';
 
-const Post = ({ username, caption, selectedFile, createAt, isUser, id, likeCount }) => {
+const Post = ({ username, caption, selectedFile, createAt, isUser, id, likes }) => {
     const navigate = useNavigate();
-    const dispatch = useDispatch();
-
-    const [open, setOpen] = useState(false);
+    const [post, setPost] = useState(likes.length);
 
     const handleEdit = (e) => {
         navigate(`/myposts/${id}`)
@@ -20,14 +19,15 @@ const Post = ({ username, caption, selectedFile, createAt, isUser, id, likeCount
 
     const likePost = async () => {
         try {
-            const { data } = await axios.patch(`post/${id}/likePost`)
-            dispatch(postActions.like(data))
+            const { data } = await api.patch(`post/${id}/likePost`)
             console.log(data)
+            setPost(data.likes.length)
         } catch (error) {
             console.log(error.response.data.message);
         }
     };
 
+    const [open, setOpen] = useState(false);
     const handleCloseModal = () => setOpen(false);
 
     const handleDelete = () => {
@@ -41,7 +41,7 @@ const Post = ({ username, caption, selectedFile, createAt, isUser, id, likeCount
 
     const handleDeleteTrue = async () => {
         try {
-            const { data } = await axios.delete(`/post/${id}`)
+            const { data } = await api.delete(`/post/${id}`)
             console.log(data)
             window.location.reload();
         } catch (error) {
@@ -133,7 +133,7 @@ const Post = ({ username, caption, selectedFile, createAt, isUser, id, likeCount
             />
             <CardContent sx={{ padding: 1 }}>
                 <Button size="small" style={{ color: "grey", padding: 3, right: 3 }} onClick={likePost}>
-                    <ThumbUpIcon style={{ color: "grey", paddingRight: 3, fontSize: 15 }} /> Like {likeCount}
+                    <ThumbUpIcon style={{ color: "grey", paddingRight: 3, fontSize: 15 }} /> {post} Likes
                 </Button>
                 <Typography variant="body2" sx={{ fontSize: 14 }}>
                     <b sx={{ fontSize: 15 }}>{username}</b> {caption}

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { Typography, InputLabel, Box, TextField, Button } from '@mui/material';
+import api from '../api/api';
 
 const PostDetail = () => {
     const navigate = useNavigate();
@@ -10,7 +10,7 @@ const PostDetail = () => {
     const id = useParams().id;
 
     const fetchDetails = async () => {
-        const res = await axios.get(`/post/${id}`)
+        const res = await api.get(`/post/${id}`)
             .catch((error) => console.log(error.message))
         const data = await res.data;
         return data;
@@ -27,15 +27,13 @@ const PostDetail = () => {
 
 
     const sendRequest = async () => {
-        const res = await axios.put(`/post/update/${id}`, {
+        const res = await api.put(`/post/update/${id}`, {
             caption: inputs.caption
         })
             .catch(error => console.log(error));
         const data = await res.data;
         return data;
     }
-
-    console.log(post)
 
     const handleSubmit = (e) => {
         e.preventDefault();

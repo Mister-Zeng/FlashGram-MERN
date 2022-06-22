@@ -24,7 +24,6 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "client", "build", "index.html"));
 })
 const port = process.env.PORT || 5000;
-
 const uri = process.env.ATLAS_URI;
 
 const main = async () => {

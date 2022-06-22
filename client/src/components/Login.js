@@ -27,6 +27,7 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
+
             const res = await axios.post("/user/login", {
                 username: inputs.username,
                 password: inputs.password,
@@ -35,7 +36,7 @@ const Login = () => {
             dispatch(authActions.login());
             console.log(data)
             navigate("/posts");
-            localStorage.setItem('userId', data.user._id);
+            localStorage.setItem('user', JSON.stringify(data));
         } catch (error) {
             dispatch(authActions.loginFailure());
             console.log(error.response.data.message);

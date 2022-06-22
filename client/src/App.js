@@ -17,7 +17,7 @@ function App() {
   console.log(isLoggedIn);
 
   useEffect(() => {
-    if (localStorage.getItem("userId")) {
+    if (localStorage.getItem("user")) {
       dispatch(authActions.login());
     }
   }, [dispatch])

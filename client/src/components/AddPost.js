@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import FileBase from 'react-file-base64';
-import axios from 'axios';
 import { Typography, InputLabel, Box, TextField, Button } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { postActions } from '../store/post';
+import api from '../api/api';
 
 const AddPost = () => {
     const navigate = useNavigate();
@@ -23,10 +23,10 @@ const AddPost = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const { data } = await axios.post("/post/add", {
+            const { data } = await api.post("/post/add", {
                 caption: inputs.caption,
                 selectedFile: inputs.selectedFile,
-                user: localStorage.getItem("userId"),
+                user: JSON.parse(localStorage.getItem("user")).user._id,
                 createAt: new Date(),
             })
             console.log(data);
