@@ -24,13 +24,13 @@ const Header = () => {
                 <Toolbar>
                     <Typography variant="h4"><img width={"70px"} src={logo} alt="logo" /></Typography>
                     {
-                        isMatch ? (
+                        isMatch ? ( // If screen width is medium breakdown size, show hamburger navbar other wise full navbar
                             <>
                                 <DrawerComponent />
                             </>
                         ) : (
                             <>
-                                {isLoggedIn && (
+                                {isLoggedIn && ( // Tabs to show when user is logged in and not logged in
                                     <Box display="flex" marginLeft="auto">
                                         <Tabs textColor="inherit" sx={{ color: "black" }} value={value} onChange={handleChange}
                                             TabIndicatorProps={{
