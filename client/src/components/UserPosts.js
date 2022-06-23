@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import api from '../api/api';
+import axios from 'axios';
 import Post from './Post';
 import moment from 'moment';
 import LoadingSpinner from './LoadingSpinner';
@@ -11,7 +11,7 @@ const UserPosts = () => {
     useEffect(() => {
         const id = JSON.parse(localStorage.getItem("user")).user._id;
         const sendRequest = async () => {
-            const { data } = await api.get(`/post/user/${id}`)
+            const { data } = await axios.get(`/post/user/${id}`)
                 .catch(error => console.log(error))
             console.log(data)
             setUser(data.user);

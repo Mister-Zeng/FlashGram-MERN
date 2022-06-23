@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import api from '../api/api';
+import axios from 'axios';
 import moment from 'moment';
 import Post from './Post';
 import LoadingSpinner from './LoadingSpinner';
@@ -10,7 +10,7 @@ const Posts = () => {
 
     useEffect(() => {
         const sendRequest = async () => {
-            const { data } = await api.get("/post")
+            const { data } = await axios.get("/post")
             return data
         }
         sendRequest()
