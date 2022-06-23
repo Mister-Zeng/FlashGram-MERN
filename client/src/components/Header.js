@@ -75,7 +75,7 @@ const Header = () => {
                                             Login
                                         </Button>
                                         <Button sx={{ margin: 1, color: "black" }} color="warning" variant="contained" component={NavLink} to='/signup'>
-                                            Sign up
+                                            Signup
                                         </Button>
                                     </Box>
                                 </>

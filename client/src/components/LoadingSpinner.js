@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 
 const LoadingSpinner = () => {
     return (
-        < Box sx={{ position: "absolute", top: "50%", left: "50%" }}>
+        < Box sx={{ position: "absolute", top: "50%", left: "48%" }}>
             <CircularProgress />
         </Box>
     )

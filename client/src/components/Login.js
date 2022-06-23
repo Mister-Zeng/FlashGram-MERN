@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, NavLink } from 'react-router-dom';
-import axios from 'axios';
+import api from '../api/api';
 import { Box, Typography, TextField, Button, InputLabel } from '@mui/material';
 import logo from '../images/logos.png';
 import { authActions } from "../store/auth";
@@ -27,8 +27,7 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-
-            const res = await axios.post("/user/login", {
+            const res = await api.post("/user/login", {
                 username: inputs.username,
                 password: inputs.password,
             })

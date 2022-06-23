@@ -23,7 +23,7 @@ This is the solution to the FlashGram App
 Users should be able to:
 
 - Sign up/ login / log out
-- Create posts
+- Add posts
 - Edit posts
 - Delete posts
 - Like posts

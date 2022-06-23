@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate, NavLink } from 'react-router-dom';
-import axios from 'axios';
+import api from '../api/api';
 import { Box, Typography, TextField, Button, InputLabel } from '@mui/material';
 import logo from '../images/logos.png';
 import { authActions } from "../store/auth";
@@ -28,7 +28,7 @@ const Signup = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            const res = await axios.post("/user/signup", {
+            const res = await api.post("/user/signup", {
                 name: inputs.name,
                 email: inputs.email,
                 username: inputs.username,
