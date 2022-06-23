@@ -12,14 +12,13 @@ const AddPost = () => {
     const missingFile = useSelector(state => state.post.missingFile)
     const [inputs, setInputs] = useState({ caption: '', selectedFile: '' });
 
+    // retrieving data from form and update to state
     const handleChange = (e) => {
         setInputs((prevState) => ({
             ...prevState,
             [e.target.name]: e.target.value
         }))
     }
-
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -35,12 +34,14 @@ const AddPost = () => {
             console.log(error.response.data.message)
         }
 
+        // return true if no file is uploaded
         const fileEmpty = () => {
-            if (inputs.caption === "") {
+            if (inputs.selectedFile === "") {
                 return true;
             }
         }
 
+        // if no file is uploaded, dispatch missing file status to true and display message for 5 seconds 
         if (fileEmpty) {
             dispatch(postActions.missingFile())
             const timer = () => setTimeout(() => {

@@ -6,7 +6,6 @@ import api from '../api/api';
 const PostDetail = () => {
     const navigate = useNavigate();
     const [inputs, setInputs] = useState({});
-    const [post, setPost] = useState();
     const id = useParams().id;
 
     const fetchDetails = async () => {
@@ -16,13 +15,14 @@ const PostDetail = () => {
         return data;
     }
 
+    // once data is fetched, update the edited caption to the post
     useEffect(() => {
-        fetchDetails().then((data) => {
-            setPost(data.post);
-            setInputs({
-                caption: data.post.caption
+        fetchDetails()
+            .then((data) => {
+                setInputs({
+                    caption: data.post.caption
+                });
             });
-        });
     }, [id]);
 
 
@@ -42,6 +42,7 @@ const PostDetail = () => {
             .then((data) => console.log(data))
             .then(() => navigate('/myposts'))
     }
+
     const handleChange = (e) => {
         setInputs((prevState) => ({
             ...prevState,

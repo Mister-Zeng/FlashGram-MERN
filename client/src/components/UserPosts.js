@@ -3,7 +3,6 @@ import axios from 'axios';
 import Post from './Post';
 import moment from 'moment';
 import LoadingSpinner from './LoadingSpinner';
-import { useSelector } from 'react-redux';
 
 const UserPosts = () => {
     const [user, setUser] = useState()

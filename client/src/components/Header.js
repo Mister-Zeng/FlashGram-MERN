@@ -1,21 +1,46 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { AppBar, Typography, Toolbar, Box, Button, Tab, Tabs, useMediaQuery, useTheme } from '@mui/material';
 import logo from '../images/logos.png';
 import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { authActions } from "../store/auth";
 import DrawerComponent from './DrawerComponent';
+import decode from "jwt-decode";
+
 
 const Header = () => {
+    const navigate = useNavigate();
+    const location = useLocation();
     const theme = useTheme();
     const isMatch = useMediaQuery(theme.breakpoints.down('md'))
     const dispatch = useDispatch();
     const [value, setValue] = useState(0)
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")))
     const isLoggedIn = useSelector(state => state.auth.isLoggedIn)
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
+
+    const logout = () => {
+        dispatch(authActions.logout())
+        navigate("/")
+    }
+
+    useEffect(() => {
+        const token = user?.token
+        // decode token and once token expires, it will auto logout 
+        if (token) {
+            const decodedToken = decode(token);
+            if (decodedToken.exp * 1000 < new Date().getTime()) {
+                logout()
+            }
+        }
+
+        setUser(JSON.parse(localStorage.getItem("user")));
+    }, [location])
+
     return (
         <React.Fragment>
             <AppBar position="fixed" sx={{
@@ -56,7 +81,7 @@ const Header = () => {
                                 </>
                                 }
                                 {isLoggedIn && (
-                                    <Button onClick={() => dispatch(authActions.logout())} sx={{ margin: 1, color: "black" }} color="warning" variant="contained" component={NavLink} to='/'>
+                                    <Button onClick={logout} sx={{ margin: 1, color: "black" }} color="warning" variant="contained" component={NavLink} to='/'>
                                         Log out
                                     </Button>
                                 )}

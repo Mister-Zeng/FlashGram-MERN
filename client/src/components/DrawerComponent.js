@@ -2,17 +2,20 @@ import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { Drawer, List, ListItemButton, ListItemText, IconButton, ListItemIcon } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
 import CancelIcon from '@mui/icons-material/Cancel';
 import { authActions } from "../store/auth";
 
 const DrawerComponent = () => {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
-    const isLoggedIn = useSelector(state => state.isLoggedIn)
+    const isLoggedIn = useSelector(state => state.auth.isLoggedIn)
     const [openDrawer, setOpenDrawer] = useState(false)
     const handleLogOutNav = () => {
         setOpenDrawer(false);
         dispatch(authActions.logout())
+        navigate("/")
     }
 
     return (
@@ -51,12 +54,12 @@ const DrawerComponent = () => {
                             <CancelIcon />
                         </IconButton>
                         <ListItemButton onClick={() => setOpenDrawer(false)} component={NavLink} to='/login'>
-                            <ListItemIcon>
+                            <ListItemIcon sx={{ display: "flex", margin: "auto" }}>
                                 <ListItemText>Login</ListItemText>
                             </ListItemIcon>
                         </ListItemButton>
                         <ListItemButton onClick={() => setOpenDrawer(false)} component={NavLink} to='/signup'>
-                            <ListItemIcon>
+                            <ListItemIcon sx={{ display: "flex", margin: "auto" }}>
                                 <ListItemText>Sign up</ListItemText>
                             </ListItemIcon>
                         </ListItemButton>

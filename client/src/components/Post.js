@@ -4,10 +4,7 @@ import { Card, CardHeader, CardMedia, CardContent, Avatar, Typography, Box, Moda
 import profile from '../images/profile.jpeg'
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
-import { useDispatch } from 'react-redux';
-import { postActions } from '../store/post';
 import api from '../api/api';
-import { useSelector } from 'react-redux';
 
 const Post = ({ username, caption, selectedFile, createAt, isUser, id, likes }) => {
     const navigate = useNavigate();
@@ -133,7 +130,7 @@ const Post = ({ username, caption, selectedFile, createAt, isUser, id, likes }) 
             />
             <CardContent sx={{ padding: 1 }}>
                 <Button size="small" style={{ color: "grey", padding: 3, right: 3 }} onClick={likePost}>
-                    <ThumbUpIcon style={{ color: "grey", paddingRight: 3, fontSize: 15 }} /> {post} Likes
+                    <ThumbUpIcon style={{ color: "grey", paddingRight: 3, fontSize: 15 }} /> {post} Like
                 </Button>
                 <Typography variant="body2" sx={{ fontSize: 14 }}>
                     <b sx={{ fontSize: 15 }}>{username}</b> {caption}

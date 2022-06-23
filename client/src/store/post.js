@@ -7,7 +7,7 @@ const postSlice = createSlice({
         posts: []
     },
     reducers: {
-        // to check if image is uploaded to create new post
+        // status to check if image is uploaded to create a new post
         missingFile(state) {
             state.missingFile = true
         },
