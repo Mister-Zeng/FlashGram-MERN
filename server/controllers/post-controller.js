@@ -82,12 +82,15 @@ export const getById = async (req, res, next) => {
 export const deletePost = async (req, res, next) => {
     const { id } = req.params;
 
-
     try {
         const post = await Post.findByIdAndDelete(id).populate('user');
 
+        await post.user.posts.pull(post)
+        await post.user.save()
+
         if (!post) {
             return res.status(500).json({ message: "Unable To Delete" })
+
         }
         res.status(200).json({ message: "Deleted Successfully" })
     } catch (error) {
@@ -110,7 +113,7 @@ export const getUserById = async (req, res, next) => {
     }
 }
 
-export const likePost = async (req, res) => {
+export const likePost = async (req, res, next) => {
     const { id } = req.params;
 
     if (!req.userId) {

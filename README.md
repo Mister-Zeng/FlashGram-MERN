@@ -39,7 +39,7 @@ Users should be able to:
 ### Links
 
 - Solution URL: [https://github.com/Mister-Zeng/FlashGram-MERN]
-- Live Site URL: [https://flashgram.herokuapp.com]
+- Live Site URL: [https://flashgram.herokuapp.com/]
 
 ### Login crendential / Register your own
 
