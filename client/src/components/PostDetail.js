@@ -27,7 +27,7 @@ const PostDetail = () => {
 
 
     const sendRequest = async () => {
-        const res = await api.put(`/post/update/${id}`, {
+        const res = await axios.put(`/post/update/${id}`, {
             caption: inputs.caption
         })
             .catch(error => console.log(error));

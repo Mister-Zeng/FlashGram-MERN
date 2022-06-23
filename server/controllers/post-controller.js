@@ -3,16 +3,15 @@ import Post from '../models/post-model.js'
 import User from '../models/user-model.js';
 
 export const getAllPosts = async (req, res) => {
-    let posts;
     try {
-        posts = await Post.find().populate('user')
+        const posts = await Post.find().populate('user')
+        if (!posts) {
+            return res.status(404).json({ message: "No Posts Found" })
+        }
+        res.status(200).json({ posts })
     } catch (error) {
         console.log(error.message)
     }
-    if (!posts) {
-        return res.status(404).json({ message: "No Posts Found" })
-    }
-    res.status(200).json({ posts })
 }
 
 export const addPost = async (req, res) => {
@@ -51,63 +50,66 @@ export const addPost = async (req, res) => {
 export const updatePost = async (req, res) => {
     const { caption } = req.body;
     const { id } = req.params;
-    let post;
     try {
-        post = await Post.findByIdAndUpdate(id, {
+        const post = await Post.findByIdAndUpdate(id, {
             caption
         });
+
+        if (!post) {
+            return res.status(500).json({ message: "Unable To Update The Post" })
+        }
+        res.status(200).json({ post });
     } catch (error) {
         console.log(error);
     }
-    if (!post) {
-        return res.status(500).json({ message: "Unable To Update The Post" })
-    }
-    res.status(200).json({ post });
+
 }
 
 export const getById = async (req, res) => {
     const { id } = req.params;
-    let post;
+
     try {
         post = await Post.findById(id);
+
+        if (!post) {
+            return res.status(500).json({ message: "Unable To Update The Post" })
+        }
+        res.status(200).json({ post });
     } catch (error) {
         console.log(error)
     }
-    if (!post) {
-        return res.status(404).json({ message: "No Post Found" })
-    }
-    res.status(200).json({ post })
 }
 
 export const deletePost = async (req, res) => {
     const { id } = req.params;
 
-    let post;
+
     try {
-        post = await Post.findByIdAndRemove(id).populate('user');
+        const post = await Post.findByIdAndRemove(id).populate('user');
         await post.user.posts.remove(post)
+
+        if (!post) {
+            return res.status(500).json({ message: "Unable To Delete" })
+        }
+        res.status(200).json({ message: "Deleted Successfully" })
     } catch (error) {
         console.log(error);
     }
-    if (!post) {
-        return res.status(500).json({ message: "Unable To Delete" })
-    }
-    res.status(200).json({ message: "Deleted Successfully" })
 }
 
 export const getUserById = async (req, res) => {
     const { id } = req.params;
 
-    let userPosts;
     try {
-        userPosts = await User.findById(id).populate("posts");
+        const userPosts = await User.findById(id).populate("posts");
+
+        if (!userPosts) {
+            return res.status(404).json({ message: "No Post Found" })
+        }
+        res.status(200).json({ user: userPosts })
     } catch (error) {
         console.log(error)
     }
-    if (!userPosts) {
-        return res.status(404).json({ message: "No Post Found" })
-    }
-    res.status(200).json({ user: userPosts })
 }
 
 export const likePost = async (req, res) => {
