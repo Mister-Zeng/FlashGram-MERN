@@ -36,7 +36,7 @@ const Signup = () => {
             })
             const data = await res.data;
             dispatch(authActions.login());
-            localStorage.setItem('userId', data.user._id);
+            localStorage.setItem('user', JSON.stringify(data));
             navigate("/posts");
         } catch (error) {
             console.log(error.response.data.message)

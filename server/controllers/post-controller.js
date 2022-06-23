@@ -4,7 +4,7 @@ import User from '../models/user-model.js';
 
 export const getAllPosts = async (req, res) => {
     try {
-        const posts = await Post.find().populate('user')
+        const posts = await Post.find().populate("user")
         if (!posts) {
             return res.status(404).json({ message: "No Posts Found" })
         }
@@ -69,7 +69,7 @@ export const getById = async (req, res) => {
     const { id } = req.params;
 
     try {
-        post = await Post.findById(id);
+        const post = await Post.findById(id);
 
         if (!post) {
             return res.status(500).json({ message: "Unable To Update The Post" })
@@ -85,8 +85,7 @@ export const deletePost = async (req, res) => {
 
 
     try {
-        const post = await Post.findByIdAndRemove(id).populate('user');
-        await post.user.posts.remove(post)
+        const post = await Post.findByIdAndDelete(id).populate('user');
 
         if (!post) {
             return res.status(500).json({ message: "Unable To Delete" })

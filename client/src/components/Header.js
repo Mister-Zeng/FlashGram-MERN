@@ -41,6 +41,7 @@ const Header = () => {
         setUser(JSON.parse(localStorage.getItem("user")));
     }, [location])
 
+    const buttonStyles = { margin: 1, color: "black" }
     return (
         <React.Fragment>
             <AppBar position="fixed" sx={{
@@ -57,31 +58,24 @@ const Header = () => {
                             <>
                                 {isLoggedIn && ( // Tabs to show when user is logged in and not logged in
                                     <Box display="flex" marginLeft="auto">
-                                        <Tabs textColor="inherit" sx={{ color: "black" }} value={value} onChange={handleChange}
-                                            TabIndicatorProps={{
-                                                style: {
-                                                    backgroundColor: "black"
-                                                }
-                                            }}>
-                                            <Tab component={NavLink} to='/posts' label="All Posts" />
-                                            <Tab component={NavLink} to='/myposts' label="My Posts" />
-                                            <Tab component={NavLink} to='/posts/add' label="Add Post" />
-                                        </Tabs>
+                                        <Button sx={buttonStyles} component={NavLink} to='/posts'>All Posts</Button>
+                                        <Button sx={buttonStyles} component={NavLink} to='/myposts'>My Posts</Button>
+                                        <Button sx={buttonStyles} component={NavLink} to='/posts/add'>Add Post</Button>
                                     </Box>
                                 )}
                                 {!isLoggedIn && <>
                                     <Box display="flex" marginLeft="auto">
-                                        <Button sx={{ margin: 1, color: "black" }} color="warning" variant="contained" component={NavLink} to='/login'>
+                                        <Button sx={buttonStyles} color="warning" variant="contained" component={NavLink} to='/login'>
                                             Login
                                         </Button>
-                                        <Button sx={{ margin: 1, color: "black" }} color="warning" variant="contained" component={NavLink} to='/signup'>
+                                        <Button sx={buttonStyles} color="warning" variant="contained" component={NavLink} to='/signup'>
                                             Signup
                                         </Button>
                                     </Box>
                                 </>
                                 }
                                 {isLoggedIn && (
-                                    <Button onClick={logout} sx={{ margin: 1, color: "black" }} color="warning" variant="contained" component={NavLink} to='/'>
+                                    <Button onClick={logout} sx={buttonStyles} color="warning" variant="contained" component={NavLink} to='/'>
                                         Log out
                                     </Button>
                                 )}
