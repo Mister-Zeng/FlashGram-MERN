@@ -1,15 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import Post from './Post';
 import moment from 'moment';
 import LoadingSpinner from './LoadingSpinner';
+import UserContext from '../UserContext';
 
 const UserPosts = () => {
+    const { userData } = useContext(UserContext);
     const [user, setUser] = useState()
     const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
-        const id = JSON.parse(localStorage.getItem("user")).user._id;
+        const id = userData.user._id;
         const sendRequest = async () => {
             const { data } = await axios.get(`/post/user/${id}`)
                 .catch(error => console.log(error))

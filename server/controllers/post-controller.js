@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import Post from '../models/post-model.js'
 import User from '../models/user-model.js';
 
-export const getAllPosts = async (req, res) => {
+export const getAllPosts = async (req, res, next) => {
     try {
         const posts = await Post.find().populate("user")
         if (!posts) {
@@ -10,18 +10,18 @@ export const getAllPosts = async (req, res) => {
         }
         res.status(200).json({ posts })
     } catch (error) {
-        console.log(error.message)
+        next(error)
     }
 }
 
-export const addPost = async (req, res) => {
+export const addPost = async (req, res, next) => {
     const { user, selectedFile, caption, username } = req.body;
 
     let existingUser;
     try {
         existingUser = await User.findById(user)
     } catch (error) {
-        console.log(error);
+        next(error)
     }
     if (!existingUser) {
         return res.status(400).json({ message: "Unable To Find User By This ID" })
@@ -41,13 +41,12 @@ export const addPost = async (req, res) => {
         await existingUser.save({ session })
         await session.commitTransaction();
     } catch (error) {
-        console.log(error)
         return res.status(500).json({ message: error })
     }
     res.status(200).json({ post })
 };
 
-export const updatePost = async (req, res) => {
+export const updatePost = async (req, res, next) => {
     const { caption } = req.body;
     const { id } = req.params;
     try {
@@ -60,12 +59,12 @@ export const updatePost = async (req, res) => {
         }
         res.status(200).json({ post });
     } catch (error) {
-        console.log(error);
+        next(error)
     }
 
 }
 
-export const getById = async (req, res) => {
+export const getById = async (req, res, next) => {
     const { id } = req.params;
 
     try {
@@ -76,11 +75,11 @@ export const getById = async (req, res) => {
         }
         res.status(200).json({ post });
     } catch (error) {
-        console.log(error)
+        next(error)
     }
 }
 
-export const deletePost = async (req, res) => {
+export const deletePost = async (req, res, next) => {
     const { id } = req.params;
 
 
@@ -92,11 +91,11 @@ export const deletePost = async (req, res) => {
         }
         res.status(200).json({ message: "Deleted Successfully" })
     } catch (error) {
-        console.log(error);
+        next(error)
     }
 }
 
-export const getUserById = async (req, res) => {
+export const getUserById = async (req, res, next) => {
     const { id } = req.params;
 
     try {
@@ -107,7 +106,7 @@ export const getUserById = async (req, res) => {
         }
         res.status(200).json({ user: userPosts })
     } catch (error) {
-        console.log(error)
+        next(error)
     }
 }
 
@@ -115,7 +114,6 @@ export const likePost = async (req, res) => {
     const { id } = req.params;
 
     if (!req.userId) {
-        console.log(req.headers)
         return res.json({ message: "unauthenticated" })
     }
 

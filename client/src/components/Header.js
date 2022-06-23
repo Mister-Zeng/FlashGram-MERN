@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import { AppBar, Typography, Toolbar, Box, Button, Tab, Tabs, useMediaQuery, useTheme } from '@mui/material';
 import logo from '../images/logos.png';
@@ -7,6 +7,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { authActions } from "../store/auth";
 import DrawerComponent from './DrawerComponent';
 import decode from "jwt-decode";
+import UserContext from '../UserContext';
 
 
 const Header = () => {
@@ -15,13 +16,8 @@ const Header = () => {
     const theme = useTheme();
     const isMatch = useMediaQuery(theme.breakpoints.down('md'))
     const dispatch = useDispatch();
-    const [value, setValue] = useState(0)
-    const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")))
     const isLoggedIn = useSelector(state => state.auth.isLoggedIn)
-
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
-    };
+    const { userData } = useContext(UserContext);
 
     const logout = () => {
         dispatch(authActions.logout())
@@ -29,7 +25,7 @@ const Header = () => {
     }
 
     useEffect(() => {
-        const token = user?.token
+        const token = userData?.token
         // decode token and once token expires, it will auto logout 
         if (token) {
             const decodedToken = decode(token);
@@ -37,8 +33,6 @@ const Header = () => {
                 logout()
             }
         }
-
-        setUser(JSON.parse(localStorage.getItem("user")));
     }, [location])
 
     const buttonStyles = { margin: 1, color: "black" }

@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import api from '../api/api';
 import moment from 'moment';
 import Post from './Post';
 import LoadingSpinner from './LoadingSpinner';
+import UserContext from '../UserContext';
 
 const Posts = () => {
+    const { userData } = useContext(UserContext);
     const [posts, setPosts] = useState();
     const [isLoading, setIsLoading] = useState(true)
 
@@ -27,7 +29,7 @@ const Posts = () => {
                     posts.map((post, index) => (
                         <Post
                             id={post._id}
-                            isUser={JSON.parse(localStorage.getItem("user")).user._id === post.user._id}
+                            isUser={userData.user._id === post.user._id}
                             key={index}
                             username={post.user.username.charAt(0).toUpperCase() + post.user.username.slice(1)}
                             caption={post.caption}

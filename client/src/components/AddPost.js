@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import FileBase from 'react-file-base64';
 import { Typography, InputLabel, Box, TextField, Button } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { postActions } from '../store/post';
+import UserContext from '../UserContext';
+import FileBase from 'react-file-base64';
 import api from '../api/api';
 
 const AddPost = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const { userData } = useContext(UserContext);
     const missingFile = useSelector(state => state.post.missingFile)
     const [inputs, setInputs] = useState({ caption: '', selectedFile: '' });
 
@@ -19,13 +21,14 @@ const AddPost = () => {
             [e.target.name]: e.target.value
         }))
     }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             const { data } = await api.post("/post/add", {
                 caption: inputs.caption,
                 selectedFile: inputs.selectedFile,
-                user: JSON.parse(localStorage.getItem("user")).user._id,
+                user: userData.user._id,
                 createAt: new Date(),
             })
             console.log(data);
