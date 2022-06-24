@@ -11,14 +11,18 @@ const Posts = () => {
     const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
-        const sendRequest = async () => {
-            const { data } = await api.get("/post")
-            setPosts(data.posts);
-            setIsLoading(false)
+        try {
+            const sendRequest = async () => {
+                const { data } = await api.get("/post")
+                setPosts(data.posts);
+                setIsLoading(false)
+            }
+            sendRequest()
+        } catch (error) {
+            console.log(error.response.data.message)
         }
-        sendRequest()
     }, []);
-    console.log(posts)
+
     return (
         <div>
             <div className="posts">

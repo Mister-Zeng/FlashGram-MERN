@@ -10,28 +10,35 @@ const PostDetail = () => {
 
     // once data is fetched, update the edited caption to the post
     useEffect(() => {
-        const fetchDetails = async () => {
-            const res = await api.get(`/post/${id}`)
-                .catch((error) => console.log(error.message))
-            const data = await res.data;
-            return data;
-        }
-        fetchDetails()
-            .then((data) => {
-                setInputs({
-                    caption: data.post.caption
+        try {
+            const fetchDetails = async () => {
+                const res = await api.get(`/post/${id}`)
+                const data = await res.data;
+                return data;
+            }
+            fetchDetails()
+                .then((data) => {
+                    setInputs({
+                        caption: data.post.caption
+                    });
                 });
-            });
+        } catch (error) {
+            console.log(error.response.data.message)
+        }
     }, [id]);
 
 
     const sendRequest = async () => {
-        const res = await api.put(`/post/update/${id}`, {
-            caption: inputs.caption
-        })
-            .catch(error => console.log(error));
-        const data = await res.data;
-        return data;
+        try {
+            const res = await api.put(`/post/update/${id}`, {
+                caption: inputs.caption
+            })
+            const data = await res.data;
+            return data;
+        } catch (error) {
+            console.log(error.response.data.message)
+        }
+
     }
 
     const handleSubmit = (e) => {

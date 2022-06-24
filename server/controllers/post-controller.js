@@ -6,7 +6,7 @@ export const getAllPosts = async (req, res, next) => {
     try {
         const posts = await Post.find().populate("user")
         if (!posts) {
-            return res.status(404).json({ message: "No Posts Found" })
+            return res.status(404).json({ message: "No posts found" })
         }
         res.status(200).json({ posts })
     } catch (error) {
@@ -24,7 +24,7 @@ export const addPost = async (req, res, next) => {
         next(error)
     }
     if (!existingUser) {
-        return res.status(400).json({ message: "Unable To Find User By This ID" })
+        return res.status(400).json({ message: "Unable to find user by this ID" })
     }
     const post = new Post({
         user,
@@ -55,7 +55,7 @@ export const updatePost = async (req, res, next) => {
         });
 
         if (!post) {
-            return res.status(500).json({ message: "Unable To Update The Post" })
+            return res.status(500).json({ message: "Unable to update the post" })
         }
         res.status(200).json({ post });
     } catch (error) {
@@ -71,7 +71,7 @@ export const getById = async (req, res, next) => {
         const post = await Post.findById(id);
 
         if (!post) {
-            return res.status(500).json({ message: "Unable To Update The Post" })
+            return res.status(500).json({ message: "Unable to update the post" })
         }
         res.status(200).json({ post });
     } catch (error) {
@@ -89,10 +89,10 @@ export const deletePost = async (req, res, next) => {
         await post.user.save()
 
         if (!post) {
-            return res.status(500).json({ message: "Unable To Delete" })
+            return res.status(500).json({ message: "Unable to delete" })
 
         }
-        res.status(200).json({ message: "Deleted Successfully" })
+        res.status(200).json({ message: "Deleted successfully" })
     } catch (error) {
         next(error)
     }
@@ -105,7 +105,7 @@ export const getUserById = async (req, res, next) => {
         const userPosts = await User.findById(id).populate("posts");
 
         if (!userPosts) {
-            return res.status(404).json({ message: "No Post Found" })
+            return res.status(404).json({ message: "No post found" })
         }
         res.status(200).json({ user: userPosts })
     } catch (error) {
@@ -117,7 +117,7 @@ export const likePost = async (req, res, next) => {
     const { id } = req.params;
 
     if (!req.userId) {
-        return res.json({ message: "unauthenticated" })
+        return res.json({ message: "Unauthenticated" })
     }
 
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);

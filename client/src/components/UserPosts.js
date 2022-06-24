@@ -12,14 +12,16 @@ const UserPosts = () => {
     const id = userData.user._id;
 
     useEffect(() => {
-        const sendRequest = async () => {
-            const { data } = await api.get(`/post/user/${id}`)
-                .catch(error => console.log(error))
-            console.log(data)
-            setUser(data.user);
-            setIsLoading(false);
+        try {
+            const sendRequest = async () => {
+                const { data } = await api.get(`/post/user/${id}`)
+                setUser(data.user);
+                setIsLoading(false);
+            }
+            sendRequest()
+        } catch (error) {
+            console.log(error.response.data.message)
         }
-        sendRequest()
     }, [id])
 
     return (

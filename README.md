@@ -84,7 +84,7 @@ This is what I did:
 
 ### What I learned
 
-This is a first full stack social media application using the MERN stack. This application helped me understand all the function of a full CRUD application. 
+This is a full stack social media application using the MERN stack. This application helped me understand all the function of a full CRUD application. 
 
 ### Continued development
 

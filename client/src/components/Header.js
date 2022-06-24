@@ -22,6 +22,7 @@ const Header = () => {
     const logout = () => {
         dispatch(authActions.logout())
         navigate("/")
+        window.location.reload();
     }
 
 
