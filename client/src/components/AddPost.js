@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Typography, InputLabel, Box, TextField, Button } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { postActions } from '../store/post';
-import UserContext from '../UserContext';
+import UserContext from '../context/UserContext';
 import FileBase from 'react-file-base64';
 import api from '../api/api';
 

@@ -7,7 +7,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { authActions } from "../store/auth";
 import DrawerComponent from './DrawerComponent';
 import decode from "jwt-decode";
-import UserContext from '../UserContext';
+import UserContext from '../context/UserContext';
 
 
 const Header = () => {
@@ -33,7 +33,7 @@ const Header = () => {
                 logout()
             }
         }
-    }, [location])
+    }, [location.pathname])
 
     const buttonStyles = { margin: 1, color: "black" }
     return (

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { authActions } from "./store/auth";
-import { UserProvider } from './UserContext';
+import { UserProvider } from './context/UserContext';
 import Header from './components/Header';
 import Signup from './components/Signup';
 import Login from './components/Login';

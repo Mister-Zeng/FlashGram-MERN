@@ -3,7 +3,7 @@ import axios from 'axios';
 import Post from './Post';
 import moment from 'moment';
 import LoadingSpinner from './LoadingSpinner';
-import UserContext from '../UserContext';
+import UserContext from '../context/UserContext';
 
 const UserPosts = () => {
     const { userData } = useContext(UserContext);
