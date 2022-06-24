@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import axios from 'axios';
+import api from '../api/api';
 import Post from './Post';
 import moment from 'moment';
 import LoadingSpinner from './LoadingSpinner';
@@ -9,18 +9,18 @@ const UserPosts = () => {
     const { userData } = useContext(UserContext);
     const [user, setUser] = useState()
     const [isLoading, setIsLoading] = useState(true)
+    const id = userData.user._id;
 
     useEffect(() => {
-        const id = userData.user._id;
         const sendRequest = async () => {
-            const { data } = await axios.get(`/post/user/${id}`)
+            const { data } = await api.get(`/post/user/${id}`)
                 .catch(error => console.log(error))
             console.log(data)
             setUser(data.user);
             setIsLoading(false);
         }
         sendRequest()
-    }, [])
+    }, [id])
 
     return (
         <div>

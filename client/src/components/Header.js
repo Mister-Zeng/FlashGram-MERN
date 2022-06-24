@@ -1,6 +1,6 @@
 import React, { useEffect, useContext } from 'react';
 import { NavLink } from 'react-router-dom';
-import { AppBar, Typography, Toolbar, Box, Button, Tab, Tabs, useMediaQuery, useTheme } from '@mui/material';
+import { AppBar, Typography, Toolbar, Box, Button, useMediaQuery, useTheme } from '@mui/material';
 import logo from '../images/logos.png';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -18,14 +18,14 @@ const Header = () => {
     const dispatch = useDispatch();
     const isLoggedIn = useSelector(state => state.auth.isLoggedIn)
     const { userData } = useContext(UserContext);
-
+    const token = userData?.token
     const logout = () => {
         dispatch(authActions.logout())
         navigate("/")
     }
 
+
     useEffect(() => {
-        const token = userData?.token
         // decode token and once token expires, it will auto logout 
         if (token) {
             const decodedToken = decode(token);
@@ -33,6 +33,7 @@ const Header = () => {
                 logout()
             }
         }
+        // eslint-disable-next-line
     }, [location.pathname])
 
     const buttonStyles = { margin: 1, color: "black" }

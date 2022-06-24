@@ -13,13 +13,10 @@ const Posts = () => {
     useEffect(() => {
         const sendRequest = async () => {
             const { data } = await api.get("/post")
-            return data
+            setPosts(data.posts);
+            setIsLoading(false)
         }
         sendRequest()
-            .then((data) => {
-                setPosts(data.posts);
-                setIsLoading(false)
-            })
     }, []);
     console.log(posts)
     return (
